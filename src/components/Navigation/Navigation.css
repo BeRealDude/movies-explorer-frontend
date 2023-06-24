@@ -1,0 +1,68 @@
+.navigation__btnAutch {
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+}
+
+.navigation__btnAutch_background {
+    color: #000;
+    background: #3DDC84;
+    width: 76px;
+    height: 32px;
+    border-radius: 3px;
+    margin-left: 30px;
+}
+
+.navigation__btnAutch:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.navigation__btn {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 18px;
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+}
+
+.navigation__btn_active {
+    font-weight: 500;
+    color: #3DDC84;
+}
+
+.navigation__btn:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.navigation__btn_icon {
+    padding: 10px;
+    border-radius: 6px;
+    background: #313131;
+    margin-left: 13px;
+}
+
+.navigation__wrapp {
+    display: flex;
+}
+
+.navigation__btn:first-of-type {
+    margin-right: 20px;
+}
+
+.navigation__btn:last-of-type {
+    margin-left: 50px;
+}
+
+
