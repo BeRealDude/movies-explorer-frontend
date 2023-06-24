@@ -27,7 +27,7 @@ function Navigation({ loggedIn }) {
     }
  
     return (
-      <nav className="navigation">
+      <div className="navigation">
       {loggedIn !== true ?
       <div className="navigation__wrappAutch">
         <button onClick={switchPageSignup} className="navigation__btnAutch">Регистрация</button>
@@ -51,7 +51,7 @@ function Navigation({ loggedIn }) {
 
         </div>
         }
-     </nav>
+     </div>
     );
   }
   

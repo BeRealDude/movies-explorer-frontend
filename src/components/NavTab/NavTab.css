@@ -1,0 +1,29 @@
+.nav {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.nav__link {
+    color: #FFF;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 16px;
+    text-decoration: none;
+    width: 96px;
+    height: 36px;
+    display: flex;
+    border-radius: 10px;
+    background: #303030;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.nav__link:last-of-type {
+    margin: 0;
+}
+
+.nav__link:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}

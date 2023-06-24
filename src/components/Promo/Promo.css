@@ -1,0 +1,25 @@
+.promo {
+background-color: #202020;
+padding: 20px 40px 0;
+}
+
+.promo__container {
+background-color: #272727;
+min-height: 493px;
+display: flex;
+align-items: center;
+flex-direction: column;
+justify-content: space-between;
+}
+
+.promo__title {
+    color: #FFF;
+    line-height: 58px;
+    font-size: 50px;
+    margin: 0;
+    letter-spacing: -2px;
+    font-weight: 400;
+    max-width: 730px;
+    text-align: center;
+    margin-top: 160px;
+}
