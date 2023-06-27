@@ -1,8 +1,6 @@
 function PageNotFound() {
     return (
-      <>
-      <div>Страница не найдена</div>
-      </>
+      <div id="pageNotFound">Страница не найдена</div>
     );
   }
   

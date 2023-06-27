@@ -1,6 +1,5 @@
 import "./AboutMe.css";
 import ava from "../../images/ava.jpg";
-import arrow from "../../images/icon_arrow.svg";
 
 function AboutMe() {
   return (
@@ -21,38 +20,6 @@ function AboutMe() {
           Github
         </a>
         <img className="aboutMe__img" src={ava} alt="моё фото" />
-      </div>
-      <div className="aboutMe__portfolio">
-        <p className="aboutMe__portfolio-title">Портфолио</p>
-        <ul className="projects">
-          <li className="projects__item">
-            <a
-              className="projects__link"
-              href="https://github.com/BeRealDude/how-to-learn"
-            >
-              Статичный сайт
-              <img className="projects__arrow" src={arrow} alt="стрелка" />
-            </a>
-          </li>
-          <li className="projects__item">
-            <a
-              className="projects__link"
-              href="https://github.com/BeRealDude/russian-travel"
-            >
-              Адаптивный сайт
-              <img className="projects__arrow" src={arrow} alt="стрелка" />
-            </a>
-          </li>
-          <li className="projects__item">
-            <a
-              className="projects__link"
-              href="https://github.com/BeRealDude/react-mesto-api-full-gha"
-            >
-              Одностраничное приложение
-              <img className="projects__arrow" src={arrow} alt="стрелка" />
-            </a>
-          </li>
-        </ul>
       </div>
     </section>
   );

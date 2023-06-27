@@ -9,6 +9,7 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 import { useState } from 'react';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Footer from '../Footer/Footer';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -35,6 +36,14 @@ function App() {
         <Route path="/signin" element={<Login />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
+
+      {location.pathname === "/signup" || location.pathname === "/signin" ? (
+        ""
+      ) : (
+        <Footer />
+      )}
+      
+      
     </>
   );
   }
