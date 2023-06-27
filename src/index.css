@@ -2,7 +2,9 @@
 @import url(./vendor/fonts/Inter_Web/inter.css);
 
 body {
-  margin: 0;
+  max-width: 1280px;
+  background-color: #202020;
+  margin: 0 auto;
   font-family: 'Inter', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

@@ -3,10 +3,6 @@
     padding: 110px 70px;
 }
 
-.project__wrapp {
-
-}
-
 .project__container {
 display: grid;
 }
@@ -20,7 +16,7 @@ display: grid;
 }
 
 .project__line {
-    background-image: url('../../images/line_AboutProject.svg');
+    background-image: url('../../images/line_under-heading.svg');
     height: 1px;
 }
 
