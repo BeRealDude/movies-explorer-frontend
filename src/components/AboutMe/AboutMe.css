@@ -1,0 +1,126 @@
+.aboutMe {
+    padding: 110px 70px 125px;
+}
+
+.aboutMe__title {
+    color: #FFF;
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    font-weight: 400;
+    margin: 0 0 23px;
+}
+
+.aboutMe__line {
+    background-image: url('../../images/line_under-heading.svg');
+    height: 1px;
+}
+
+.aboutMe__container {
+    display: grid;
+    margin: 66px 0 101px;
+    grid-auto-rows: 18% 64px 27% 116px;
+    column-gap: 270px;
+}
+
+.aboutMe__subTitle {
+    color: #FFF;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.aboutMe__thesis {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0;
+    grid-column: 1/2;
+    align-self: center;
+}
+
+.aboutMe__text {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+    font-weight: 400;
+    grid-column: 1/2;
+}
+
+.aboutMe__git {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    grid-column: 1/2;
+    align-self: self-end;
+}
+
+.aboutMe__img {
+    border-radius: 10px;
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    grid-column: 2/3;
+    grid-row: 1/5;
+}
+
+.aboutMe__portfolio {
+
+}
+
+.aboutMe__portfolio-title {
+    color: #8B8B8B;
+    font-size: 18px;
+    line-height: 20px;
+    margin: 0;
+    margin: 0 0 50px;
+}
+
+.projects {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.projects__item {
+    border-bottom: 1px solid #424242;
+    margin-bottom: 20px;
+    padding-bottom: 19px;
+}
+
+.projects__item:last-of-type {
+    border-bottom: none;
+    margin: 0;
+    padding: 0;
+}
+
+.projects__link {
+    color: #FFF;
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -1.2px;
+    text-decoration: none;
+
+    display: grid;
+    grid-template-columns: 38% 3%;
+    column-gap: 59%;
+}
+
+.projects__arrow {
+    align-self: center;
+    justify-self: center;
+}
+
+.aboutMe__git:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.projects__link:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
