@@ -13,15 +13,20 @@ import Footer from '../Footer/Footer';
 import moviesData from '../../utils/moviesData';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(true);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const [movies, setMovies] = useState(moviesData);
 
   const location = useLocation();
   
+  
 
   function handleLogin() {
     setLoggedIn(true);
+  }
+
+  const saveMovie = (newMovie) => {
+    setMovies(movie => [newMovie, ...movie]);
   }
 
   return (
@@ -34,11 +39,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/movies" element={<Movies movies={movies} />} />
-        <Route path="/saved-movies" element={<SavedMovies />} />
+        <Route path="/movies" element={<Movies movies={movies} onSaveMovie={saveMovie} />} />
+        <Route path="/saved-movies" element={<SavedMovies movies={movies}/>} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
+        <Route path="/signin" element={<Login isLoggedIn={handleLogin}/>} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 

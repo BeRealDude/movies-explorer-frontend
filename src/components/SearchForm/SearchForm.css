@@ -42,7 +42,7 @@
 }
 
 .form__error {
-    color: red;
+    color: #EE3465;
     position: absolute;
     top: 59px;
     left: 52px;

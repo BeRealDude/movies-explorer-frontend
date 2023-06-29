@@ -57,3 +57,23 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+.movies-list__btn-delete {
+    background-image: url('../../images/icon_btn-delete.svg');
+    width: 30px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: end;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+
+.movies-list__card:hover .movies-list__btn-delete {
+    transition: 0.3s;
+    opacity: 0.6;
+}

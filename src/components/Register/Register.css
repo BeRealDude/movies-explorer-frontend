@@ -1,0 +1,74 @@
+.form-page__heading {
+    color: #8B8B8B;
+    font-size: 10px;
+    font-weight: 400;
+    margin: 0 0 5px;
+}
+
+.form-page__input {
+    outline: none;
+    background-color: transparent;
+    padding: 0 0 10px;
+    margin: 0 0 24px;
+    border: none;
+    color: #FFF;
+    font-size: 14px;
+    border-bottom: 1px solid #424242;
+    width: 100%;
+}
+
+.form-page__error {
+    color: #EE3465;
+    font-size: 10px;
+    position: absolute;
+    left: 2px;
+}
+
+.form-page__error_name {
+    top: 49px;
+}
+
+.form-page__error_email {
+    top: 118px;
+}
+
+.form-page__error_password {
+    top: 187px;
+}
+
+.form-page__link-wrapp {
+    grid-row: 8/9;
+    display: flex;
+    justify-content: center;
+    padding-top: 16px;
+}
+
+.form-page__text {
+    color: #8B8B8B;
+    font-size: 14px;
+    margin: 0 6px 0 0;
+}
+
+.form-page__link {
+    text-decoration: none;
+    color: #4285F4;
+    font-size: 14px;
+}
+
+.form-page__link:hover {
+    transition: .3s;
+    opacity: .6;
+}
+
+.form-page__input_color {
+    color: #EE3465;
+}
+
+.form-page__input_border{
+    border-bottom: 1px solid #4285F4;
+}
+
+.form-page__input:focus {
+    border-bottom: 1px solid #4285F4;
+    transition: .6s;
+}

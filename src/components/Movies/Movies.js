@@ -3,11 +3,11 @@ import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 
-function Movies({ movies }) {
+function Movies({ movies, onSaveMovie }) {
     return (
       <div className="movies">
       <SearchForm />
-      <MoviesCardList movies={movies} />
+      <MoviesCardList movies={movies} onSaveMovie={onSaveMovie} />
       </div>
     );
   }
