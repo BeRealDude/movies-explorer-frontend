@@ -10,10 +10,15 @@ import Login from '../Login/Login';
 import { useState } from 'react';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
+import moviesData from '../../utils/moviesData';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  const [movies, setMovies] = useState(moviesData);
+
   const location = useLocation();
+  
 
   function handleLogin() {
     setLoggedIn(true);
@@ -29,7 +34,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/movies" element={<Movies />} />
+        <Route path="/movies" element={<Movies movies={movies} />} />
         <Route path="/saved-movies" element={<SavedMovies />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/signup" element={<Register />} />

@@ -1,8 +1,14 @@
-function Movies() {
+import './Movies.css'
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+
+
+function Movies({ movies }) {
     return (
-      <>
-      <div>Фильмы</div>
-      </>
+      <div className="movies">
+      <SearchForm />
+      <MoviesCardList movies={movies} />
+      </div>
     );
   }
   
