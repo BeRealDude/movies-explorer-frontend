@@ -72,3 +72,32 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1050px) {
+    .aboutMe {
+        padding: 90px 50px 91px;
+    }
+
+    .aboutMe__container {
+        margin: 66px 0 0px;
+        column-gap: 49px;
+        grid-auto-rows: 40px 54px 122px 94px;
+    }
+
+    .aboutMe__img {
+        width: 255px;
+        height: 307px;
+    }
+
+    .aboutMe__subTitle {
+        font-size: 40px;
+        line-height: 40px;
+        letter-spacing: -1.6px;
+    }
+
+    .aboutMe__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    
+}

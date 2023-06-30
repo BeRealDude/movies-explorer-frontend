@@ -23,3 +23,20 @@ justify-content: space-between;
     text-align: center;
     margin-top: 160px;
 }
+
+@media (max-width: 1050px) {
+    .promo {
+        padding: 20px 20px 0;
+        }
+
+    .promo__container {
+        min-height: 834px;
+        justify-content: flex-end;
+        }
+        .promo__title {
+            line-height: 52px;
+            font-size: 40px;
+            margin-bottom: 324px;
+            margin-top: 0;
+        }
+}

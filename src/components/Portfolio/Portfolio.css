@@ -49,3 +49,14 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1050px) {
+    .portfolio {
+        padding: 0 50px 90px;
+    }
+
+    .projects__link {
+        font-size: 28px;
+        letter-spacing: -1.12px;
+    }
+}

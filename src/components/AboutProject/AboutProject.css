@@ -52,7 +52,7 @@ display: grid;
 }
 
 .project__timeline {
-    width: 228px;
+    min-width: 228px;
     height: 36px;
     background: #3DDC84;
     color: #000;
@@ -78,4 +78,25 @@ display: grid;
     font-weight: 500;
     line-height: 17px;
     justify-self: center;
+}
+
+@media (max-width: 1235px) {
+    .project {
+        padding: 90px 50px;
+    }
+
+    .project__timeline {
+        min-width: 140px;
+    }
+
+    .project__timeline:last-of-type {
+        min-width: 528px;
+    }
+    
+}
+
+@media (max-width: 1050px) {
+    .project {
+        padding: 90px 50px;
+    }
 }
