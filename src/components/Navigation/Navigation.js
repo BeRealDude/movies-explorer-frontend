@@ -2,7 +2,8 @@ import './Navigation.css'
 import { useNavigate, useLocation } from "react-router-dom";
 import iconProfile from '../../images/icon_profile.svg'
 
-function Navigation({ loggedIn }) {
+function Navigation(props) {
+  const { loggedIn, onBurgerMenu } = props;
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -47,10 +48,9 @@ function Navigation({ loggedIn }) {
         <button onClick={switchPageProfile} className={
           location.pathname === '/profile' ?
           `${"navigation__btn navigation__btn_active"}` : `${"navigation__btn"}`}>Аккаунт<img src={iconProfile} alt='иконка кнопки аккаунт' className='navigation__btn_icon'/></button>
-          
-
         </div>
         }
+        {loggedIn !== true ? '' : <button onClick={onBurgerMenu} type="button"className='burger-menu-btn'></button>}
      </div>
     );
   }

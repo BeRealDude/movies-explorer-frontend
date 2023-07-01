@@ -5,15 +5,15 @@ import logoHeader from '../../images/icon_logo.svg'
 import Navigation from "../Navigation/Navigation";
 
 
-function Header({ loggedIn }) {
- 
+function Header(props) {
+ const { loggedIn, onBurgerMenu } = props
 
     return (
       <header className="header">
       <Link to='/'>
       <img src={logoHeader} alt="логотип" className="header__logo"/>
       </Link>
-      <Navigation loggedIn={loggedIn} />
+      <Navigation loggedIn={loggedIn} onBurgerMenu={onBurgerMenu} />
       <Outlet />
       </header>
     );

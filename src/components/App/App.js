@@ -11,9 +11,12 @@ import { useState } from 'react';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
 import moviesData from '../../utils/moviesData';
+import BurgerMenu from '../BurgerMenu/BurgerMenu';
 
 function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(true);
+
+  const [isBurgerMenuOpen, setBurgerMenuOpen] = useState(false);
 
   const [movies, setMovies] = useState(moviesData);
 
@@ -25,6 +28,13 @@ function App() {
   //   name: '',
   // });
   
+  function handleBurgerMenuClick() {
+    setBurgerMenuOpen(true);
+  }
+
+  function closeBurgerMenu() {
+    setBurgerMenuOpen(false);
+  }
   
 
   function handleLogin() {
@@ -44,7 +54,7 @@ function App() {
       {location.pathname === "/signup" || location.pathname === "/signin" ? (
         ""
       ) : (
-        <Header loggedIn={loggedIn} />
+        <Header loggedIn={loggedIn} onBurgerMenu={handleBurgerMenuClick}/>
       )}
 
       <Routes>
@@ -63,7 +73,10 @@ function App() {
         <Footer />
       )}
       
-      
+      <BurgerMenu 
+      isOpen={isBurgerMenuOpen}
+      onClose={closeBurgerMenu}
+      />
     </>
   );
   }
