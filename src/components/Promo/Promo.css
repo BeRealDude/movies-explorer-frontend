@@ -24,7 +24,7 @@ justify-content: space-between;
     margin-top: 160px;
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1175px) {
     .promo {
         padding: 20px 20px 0;
         }

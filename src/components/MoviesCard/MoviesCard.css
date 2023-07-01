@@ -77,3 +77,14 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1175px) {
+    .movies-list__card {
+        width: 339px;
+        height: 262px;
+    }
+
+    .movies-list__cover {
+       width: 339px;
+    }
+}

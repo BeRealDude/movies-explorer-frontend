@@ -96,7 +96,7 @@ display: grid;
     
 }
 
-@media (max-width: 1050px) {
+@media (max-width: 1175px) {
     .project {
         padding: 90px 50px;
     }

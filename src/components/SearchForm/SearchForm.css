@@ -65,3 +65,13 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1175px) {
+    .form-container {
+        padding-bottom: 132px;
+    }
+
+    .form__input {
+        width: 85%;
+    }
+}

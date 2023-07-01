@@ -33,3 +33,10 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1175px) {
+    .movies-list {
+        grid-template-columns: auto auto;
+    }
+    
+}

@@ -49,6 +49,8 @@ function App() {
     setMovies(movie => [newMovie, ...movie]);
   }
 
+// Не получается убрать хедер и футер из страницы 404
+
   return (
     <>
       {location.pathname === "/signup" || location.pathname === "/signin" ? (
@@ -64,7 +66,7 @@ function App() {
         <Route path="/profile" element={<Profile isLoggedIn={handleLoginOut} />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login isLoggedIn={handleLogin}/>} />
-        <Route path="*" element={<PageNotFound />} />
+        <Route path="*" element={<PageNotFound />} /> 
       </Routes>
 
       {location.pathname === "/signup" || location.pathname === "/signin" || location.pathname === "/profile" ? (
