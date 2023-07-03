@@ -75,3 +75,39 @@
         width: 85%;
     }
 }
+
+@media (max-width: 745px) {
+    .form-container {
+        padding-bottom: 90px;
+    }
+
+    .form__icon {
+        display: none;
+    }
+
+    .form__input::placeholder {
+        text-align: start;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .form__input {
+        width: 71%;
+    }
+
+    .form__wrapp {
+        padding-bottom: 9px;
+    }
+
+    .checkbox-container {
+        margin-top: 42px;
+    }
+
+    .form__error {
+        top: 50px;
+        left: 5px;
+        font-size: 10px;
+    }
+    
+}

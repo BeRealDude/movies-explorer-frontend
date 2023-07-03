@@ -21,7 +21,7 @@ function App() {
   const [movies, setMovies] = useState(moviesData);
 
   const location = useLocation();
-
+  
   // const [currentUser, setCurrentUser] = useState({
   //   _id: '',
   //   email: '',
@@ -49,14 +49,13 @@ function App() {
     setMovies(movie => [newMovie, ...movie]);
   }
 
-// Не получается убрать хедер и футер из страницы 404
 
   return (
     <>
-      {location.pathname === "/signup" || location.pathname === "/signin" ? (
-        ""
-      ) : (
+      {location.pathname === "/" || location.pathname === "/movies" || location.pathname === "/saved-movies" || location.pathname === "/profile" ? (
         <Header loggedIn={loggedIn} onBurgerMenu={handleBurgerMenuClick}/>
+      ) : (
+        ''
       )}
 
       <Routes>
@@ -66,13 +65,13 @@ function App() {
         <Route path="/profile" element={<Profile isLoggedIn={handleLoginOut} />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/signin" element={<Login isLoggedIn={handleLogin}/>} />
-        <Route path="*" element={<PageNotFound />} /> 
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
-      {location.pathname === "/signup" || location.pathname === "/signin" || location.pathname === "/profile" ? (
-        ""
-      ) : (
+      {location.pathname === "/" || location.pathname === "/movies" || location.pathname === "/saved-movies" ? (
         <Footer />
+      ) : (
+        ''
       )}
       
       <BurgerMenu 

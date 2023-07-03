@@ -32,3 +32,30 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 1175px) {
+    .pageNotFound{
+        padding: 408px 0 222px;
+    }
+}
+
+@media (max-width: 745px) {
+
+    .pageNotFound {
+        padding: 329px 0 30px;
+    }
+
+    .pageNotFound__hading {
+        font-size: 80px;
+    }
+
+    .pageNotFound__text {
+        font-size: 12px;
+        margin: 5px 0 0;
+    }
+
+    .pageNotFound__btn {
+        font-size: 12px;
+        margin-top: 284px;
+    }
+}

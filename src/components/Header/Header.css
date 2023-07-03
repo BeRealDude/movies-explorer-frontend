@@ -13,6 +13,12 @@
 
 @media (max-width: 1175px) {
     .header {
-        padding: 21px 30px 0;
+        padding: 18px 30px;
+    }
+}
+
+@media (max-width: 745px) {
+    .header {
+        padding: 18px 14px;
     }
 }

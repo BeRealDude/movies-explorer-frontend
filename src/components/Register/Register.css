@@ -72,3 +72,14 @@
     border-bottom: 1px solid #4285F4;
     transition: .6s;
 }
+
+@media (max-width: 745px) {
+    .form-page__text {
+        font-size: 12px;
+        margin: 0 6px 0 0;
+    }
+
+    .form-page__link {
+        font-size: 12px;
+    }
+}

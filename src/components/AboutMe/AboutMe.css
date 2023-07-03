@@ -101,3 +101,56 @@
     }
     
 }
+
+@media (max-width: 745px) {
+    .aboutMe {
+        padding: 70px 14px;
+    }
+
+    .aboutMe__title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin: 0 0 28px;
+    }
+
+    .aboutMe__container {
+        margin: 60px 0 0px;
+        grid-auto-rows: auto;
+    }
+
+    .aboutMe__img {
+        width: 292px;
+        height: 352px;
+        grid-column: 1/1;
+        grid-row: 1/2;
+    }
+
+    .aboutMe__subTitle {
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+        grid-row: 2/3;
+        margin-top: 40px;
+    }
+
+    .aboutMe__thesis {
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 16px;
+        grid-row: 3/4;
+        margin-top: 20px;
+    }
+
+    .aboutMe__text {
+        font-size: 11px;
+        line-height: 16px;
+        grid-row: 4/5;
+        margin-top: 20px;
+    }
+
+    .aboutMe__git {
+        grid-row: 5/6;
+        line-height: normal;
+        margin-top: 40px;
+    }
+}

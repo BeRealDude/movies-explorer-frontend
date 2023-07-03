@@ -27,3 +27,17 @@
     transition: 0.3s;
     opacity: 0.6;
 }
+
+@media (max-width: 745px) {
+
+    .nav {
+        margin-bottom: 17px;
+    }
+
+    .nav__link {
+        width: 82px;
+        height: 26px;
+        margin-right: 6px;
+        font-size: 10px;
+    }
+}

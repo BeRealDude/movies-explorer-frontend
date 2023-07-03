@@ -68,3 +68,31 @@
         padding: 233px 0 70px;
     }
 }
+
+@media (max-width: 745px) {
+    .form-section {
+        padding: 56px 0 30px;
+    }
+
+    .form-page__submit-btn {
+        width: 260px;
+        font-size: 12px;
+        margin-top: 216px;
+    }
+
+    .form-section__container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .form-section__heading {
+        margin: 50px 0 80px;
+    }
+
+    .form-page__submit-btn-login {
+        width: 260px;
+        font-size: 12px;
+        margin-top: 258px;
+    }
+}

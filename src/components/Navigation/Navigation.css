@@ -90,3 +90,15 @@
         opacity: 0.6;
     }
 }
+
+@media (max-width: 745px) {
+    .navigation__btnAutch {
+        font-size: 10px;
+    }
+
+    .navigation__btnAutch_background {
+        width: 54px;
+        height: 26px;
+        margin-left: 14px;
+    }
+}

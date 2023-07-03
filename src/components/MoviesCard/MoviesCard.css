@@ -88,3 +88,26 @@
        width: 339px;
     }
 }
+
+@media (max-width: 745px) {
+    .movies-list__card {
+        width: 300px;
+        height: 237px;
+    }
+
+    .movies-list__cover {
+        width: 300px;
+    }
+
+    .movies-list__name {
+        font-size: 12px;
+        margin: 14px 0 0 14px;
+        line-height: normal;
+    }
+
+    .movies-list__duration {
+        font-size: 10px;
+        margin: 14px 0 14px 14px;
+        line-height: normal;
+    }
+}

@@ -102,3 +102,9 @@ border-bottom: 1px solid #FFFFFF;
     align-items: center;
     padding-top: 159px;
 }
+
+@media (max-width: 745px) {
+    .menu__container {
+        width: 320px;
+    }
+}
