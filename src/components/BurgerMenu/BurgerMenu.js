@@ -41,18 +41,18 @@ function BurgerMenu(props) {
         <div
         className={`menu ${props.isOpen && "menu_opened"}`}
       >
-        <div className="menu__container">
+        <div className="container">
           <button
             type="button"
-            className="menu__close"
+            className="container__close"
             onClick={props.onClose}
           />
-          <div className='menu__wrapp-btnNav'>
-          <button onClick={goToMain} className='menu__btnNav'>Главная</button>
-          <button onClick={goToMovies} className='menu__btnNav'>Фильмы</button>
-          <button onClick={goToSavedMovies} className='menu__btnNav'>Сохранённые фильмы</button>
+          <div className='container__wrapp-btnNav'>
+          <button onClick={goToMain} className='container__btnNav'>Главная</button>
+          <button onClick={goToMovies} className='container__btnNav'>Фильмы</button>
+          <button onClick={goToSavedMovies} className='container__btnNav'>Сохранённые фильмы</button>
           </div>
-          <button onClick={goToProfile} className='menu__btnAcct'>Аккаунт<img src={iconProfile} alt='иконка кнопки аккаунт' className='navigation__btn_icon'/></button>
+          <button onClick={goToProfile} className='btnAcct'>Аккаунт<img src={iconProfile} alt='иконка кнопки аккаунт' className='icon'/></button>
         </div>
       </div>
     );
