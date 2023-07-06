@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 
 function MoviesCardList({ movies, onSaveMovie }) {
   const location = useLocation();
-  
 
     return (
       <div className="moviesCardList">

@@ -1,9 +1,9 @@
 import './BurgerMenu.css'
 import iconProfile from '../../images/icon_profile.svg'
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const body = document.querySelector('body');
+// const body = document.querySelector('body');
 
 function BurgerMenu(props) {
     const navigate = useNavigate();
@@ -29,13 +29,13 @@ function BurgerMenu(props) {
     }
 
 
-    useEffect(() => {
-        if(props.isOpen === true) {
-            body.style.overflow = 'hidden';
-        } else {
-            body.style.overflow = 'overlay';
-        }
-      }, [props.isOpen]);
+    // useEffect(() => {
+    //     if(props.isOpen === true) {
+    //         body.style.overflow = 'hidden';
+    //     } else {
+    //         body.style.overflow = 'overlay';
+    //     }
+    //   }, [props.isOpen]);
 
     return (
         <div

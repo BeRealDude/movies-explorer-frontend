@@ -91,7 +91,7 @@
 
 @media (max-width: 745px) {
     .movies-list__card {
-        width: 100%;
+        width: 277px;
         height: 237px;
     }
 

@@ -15,7 +15,12 @@ function AboutMe() {
           авто-мастерской. По окончанию курса по Веб-разработке, активно ищу
           постоянное место в it, учавствую в хакатонах.
         </p>
-        <a className="aboutMe__git" href="https://github.com/BeRealDude">
+        <a
+          target="_blank"
+          rel="noreferrer"
+          className="aboutMe__git"
+          href="https://github.com/BeRealDude"
+        >
           Github
         </a>
         <img className="aboutMe__img" src={ava} alt="моё фото" />
