@@ -136,12 +136,12 @@ display: grid;
     }
 
     .project__timeline {
-        min-width: 100px;
+        min-width: 90px;
         font-size: 11px;
     }
 
     .project__timeline:last-of-type {
-        min-width: 184px;
+        min-width: 168px;
     }
 
     .project__timelineName {

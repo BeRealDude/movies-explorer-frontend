@@ -7,12 +7,9 @@
     font-size: 22px;
     letter-spacing: -0.88px;
     font-weight: 400;
-    margin: 0 0 23px;
-}
-
-.aboutMe__line {
-    background-image: url('../../images/line_under-heading.svg');
-    height: 1px;
+    margin: 0;
+    padding: 0 0 23px;
+    border-bottom: 1px solid #DADADA;
 }
 
 .aboutMe__container {
@@ -119,7 +116,7 @@
     }
 
     .aboutMe__img {
-        width: 292px;
+        width: 100%;
         height: 352px;
         grid-column: 1/1;
         grid-row: 1/2;

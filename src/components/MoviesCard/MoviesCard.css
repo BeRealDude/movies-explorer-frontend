@@ -91,12 +91,12 @@
 
 @media (max-width: 745px) {
     .movies-list__card {
-        width: 300px;
+        width: 100%;
         height: 237px;
     }
 
     .movies-list__cover {
-        width: 300px;
+        width: 100%;
     }
 
     .movies-list__name {
