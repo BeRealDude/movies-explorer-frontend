@@ -1,0 +1,113 @@
+.movies-list__card {
+    width: 364px;
+    height: 281px;
+    border-radius: 6px;
+    background: #222;
+    box-shadow: 0px 4px 30px 0px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: auto 46px;
+}
+
+.movies-list__cover {
+    border-radius: 6px 6px 0 0;
+    grid-column: 1/3;
+    cursor: pointer;
+}
+
+.movies-list__name {
+    color: #FFF;
+    font-size: 13px;
+    font-weight: 500;
+    margin: 16px 0 0 16px;
+    grid-column: 1/2;
+}
+
+.movies-list__duration {
+    color: #8B8B8B;
+    font-size: 11px;
+    margin: 16px 0 16px 16px;
+    font-weight: 400;
+    grid-column: 1/2;
+}
+
+.movies-list__btn {
+    background-image: url('../../images/icon_like.svg');
+    width: 30px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: end;
+    background-repeat: no-repeat;
+}
+
+.movies-list__btn_active {
+    background-image: url('../../images/icon_like-active.svg');
+}
+
+.movies-list__btn:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.movies-list__cover:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+.movies-list__btn-delete {
+    background-image: url('../../images/icon_btn-delete.svg');
+    width: 30px;
+    height: 24px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    grid-column: 2/3;
+    grid-row: 2/3;
+    align-self: end;
+    background-repeat: no-repeat;
+    opacity: 0;
+}
+
+.movies-list__card:hover .movies-list__btn-delete {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+@media (max-width: 1175px) {
+    .movies-list__card {
+        width: 339px;
+        height: 262px;
+    }
+
+    .movies-list__cover {
+       width: 339px;
+    }
+}
+
+@media (max-width: 745px) {
+    .movies-list__card {
+        width: 277px;
+        height: 237px;
+    }
+
+    .movies-list__cover {
+        width: 100%;
+    }
+
+    .movies-list__name {
+        font-size: 12px;
+        margin: 14px 0 0 14px;
+        line-height: normal;
+    }
+
+    .movies-list__duration {
+        font-size: 10px;
+        margin: 14px 0 14px 14px;
+        line-height: normal;
+    }
+}

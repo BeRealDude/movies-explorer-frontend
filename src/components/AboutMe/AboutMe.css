@@ -1,0 +1,153 @@
+.aboutMe {
+    padding: 110px 70px 101px;
+}
+
+.aboutMe__title {
+    color: #FFF;
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    font-weight: 400;
+    margin: 0;
+    padding: 0 0 23px;
+    border-bottom: 1px solid #DADADA;
+}
+
+.aboutMe__container {
+    display: grid;
+    margin: 66px 0 101px;
+    grid-auto-rows: 18% 64px 27% 116px;
+    column-gap: 270px;
+}
+
+.aboutMe__subTitle {
+    color: #FFF;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -2px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.aboutMe__thesis {
+    color: #FFF;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0;
+    grid-column: 1/2;
+    align-self: center;
+}
+
+.aboutMe__text {
+    color: #FFF;
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+    font-weight: 400;
+    grid-column: 1/2;
+}
+
+.aboutMe__git {
+    text-decoration: none;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    grid-column: 1/2;
+    align-self: self-end;
+}
+
+.aboutMe__img {
+    border-radius: 10px;
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    grid-column: 2/3;
+    grid-row: 1/5;
+}
+
+.aboutMe__git:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+@media (max-width: 1175px) {
+    .aboutMe {
+        padding: 90px 50px 91px;
+    }
+
+    .aboutMe__container {
+        margin: 66px 0 0px;
+        column-gap: 49px;
+        grid-auto-rows: 40px 54px 122px 94px;
+    }
+
+    .aboutMe__img {
+        width: 255px;
+        height: 307px;
+    }
+
+    .aboutMe__subTitle {
+        font-size: 40px;
+        line-height: 40px;
+        letter-spacing: -1.6px;
+    }
+
+    .aboutMe__text {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    
+}
+
+@media (max-width: 745px) {
+    .aboutMe {
+        padding: 70px 14px;
+    }
+
+    .aboutMe__title {
+        font-size: 18px;
+        letter-spacing: -0.72px;
+        margin: 0 0 28px;
+    }
+
+    .aboutMe__container {
+        margin: 60px 0 0px;
+        grid-auto-rows: auto;
+    }
+
+    .aboutMe__img {
+        width: 100%;
+        height: 352px;
+        grid-column: 1/1;
+        grid-row: 1/2;
+    }
+
+    .aboutMe__subTitle {
+        font-size: 30px;
+        line-height: normal;
+        letter-spacing: -1.2px;
+        grid-row: 2/3;
+        margin-top: 40px;
+    }
+
+    .aboutMe__thesis {
+        font-size: 11px;
+        font-weight: 500;
+        line-height: 16px;
+        grid-row: 3/4;
+        margin-top: 20px;
+    }
+
+    .aboutMe__text {
+        font-size: 11px;
+        line-height: 16px;
+        grid-row: 4/5;
+        margin-top: 20px;
+    }
+
+    .aboutMe__git {
+        grid-row: 5/6;
+        line-height: normal;
+        margin-top: 40px;
+    }
+}

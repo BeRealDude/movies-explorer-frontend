@@ -1,0 +1,152 @@
+.project {
+    background: #202020;
+    padding: 110px 70px;
+}
+
+.project__container {
+display: grid;
+}
+
+.project__title {
+    margin: 0 0 23px 0;
+    color: #FFF;
+    font-size: 22px;
+    letter-spacing: -0.88px;
+    font-weight: 400;
+}
+
+.project__line {
+    background-image: url('../../images/line_under-heading.svg');
+    height: 1px;
+}
+
+.project__subtitle {
+    color: #FFF;
+    font-size: 20px;
+    font-family: Inter;
+    letter-spacing: -0.8px;
+    font-weight: 400;
+    margin: 70px 0 0 0;
+    grid-column: 1/1;
+    grid-row: 1/1;
+}
+
+.project__subtitle:last-of-type {
+    grid-column: 2/2;
+    grid-row: 1/1;
+}
+
+.project__text {
+    color: #FFF;
+    font-size: 14px;
+    font-family: Inter;
+    line-height: 20px;
+    font-weight: 400;
+    margin: 26px 0 0 0;
+    width: 99%;
+}
+
+.project__layout {
+    display: grid;
+    row-gap: 14px;
+    margin-top: 110px;
+}
+
+.project__timeline {
+    min-width: 228px;
+    height: 36px;
+    background: #3DDC84;
+    color: #000;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-column: 1/2;
+    grid-row: 1/1;
+}
+
+.project__timeline:last-of-type {
+    background: #303030;
+    color: #FFF;
+    grid-column: 2/3;
+    grid-row: 1/1;
+    min-width: 912px;
+}
+
+.project__timelineName {
+    color: #8B8B8B;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 17px;
+    justify-self: center;
+}
+
+@media (max-width: 1235px) {
+    .project {
+        padding: 90px 50px;
+    }
+
+    .project__timeline {
+        min-width: 140px;
+    }
+
+    .project__timeline:last-of-type {
+        min-width: 528px;
+    }
+    
+}
+
+@media (max-width: 1175px) {
+    .project {
+        padding: 90px 50px;
+    }
+}
+
+@media (max-width: 745px) {
+    .project {
+        padding: 70px 18px;
+    }
+
+    .project__container {
+        display: flex;
+        flex-direction: column;
+        }
+
+    .project__title {
+        letter-spacing: -0.72px;
+        font-size: 18px;
+        margin: 0 0 28px 0;
+    }
+
+    .project__subtitle {
+        margin: 60px 0 0 0;
+        font-size: 18px;
+        letter-spacing: -0.72px;
+    }
+
+    .project__text {
+        font-size: 11px;
+        line-height: 16px;
+        margin: 16px 0 0 0;
+    }
+
+    .project__layout {
+        row-gap: 10px;
+        margin-top: 60px;
+    }
+
+    .project__timeline {
+        min-width: 90px;
+        font-size: 11px;
+    }
+
+    .project__timeline:last-of-type {
+        min-width: 168px;
+    }
+
+    .project__timelineName {
+        font-size: 11px;
+        font-weight: 400;
+        line-height: 12px;
+    }
+}

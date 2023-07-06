@@ -1,0 +1,113 @@
+.form-container {
+    padding-bottom: 49px;
+}
+
+.form {
+    position: relative;
+}
+
+.form__wrapp {
+    border-bottom: 1px solid #424242;
+    display: flex;
+    padding-bottom: 15px;
+    transition: .3s;
+}
+
+.form__wrapp_click {
+    border-bottom: 1px solid #3DDC84;
+    transition: .3s;
+}
+
+.form__icon {
+    margin-right: 1%;
+    width: 34px;
+    height: 34px;
+}
+
+.form__input {
+    width: 89%;
+    border: none;
+    background: transparent;
+    color: #FFF;
+    outline: none;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.form__input::placeholder {
+    color: #8B8B8B;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.form__error {
+    color: #EE3465;
+    position: absolute;
+    top: 59px;
+    left: 52px;
+    font-size: 13px;
+    font-weight: 400;
+}
+
+.form__btn {
+    background-image: url('../../images/icon_btn-find.svg');
+    width: 85px;
+    height: 36px;
+    cursor: pointer;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    padding: 0;
+}
+
+.form__btn:hover {
+    transition: 0.3s;
+    opacity: 0.6;
+}
+
+@media (max-width: 1175px) {
+    .form-container {
+        padding-bottom: 132px;
+    }
+
+    .form__input {
+        width: 85%;
+    }
+}
+
+@media (max-width: 745px) {
+    .form-container {
+        padding-bottom: 90px;
+    }
+
+    .form__icon {
+        display: none;
+    }
+
+    .form__input::placeholder {
+        text-align: start;
+        font-size: 18px;
+        font-weight: 500;
+        line-height: normal;
+    }
+
+    .form__input {
+        width: 71%;
+    }
+
+    .form__wrapp {
+        padding-bottom: 9px;
+    }
+
+    .checkbox-container {
+        margin-top: 42px;
+    }
+
+    .form__error {
+        top: 50px;
+        left: 5px;
+        font-size: 10px;
+    }
+    
+}
