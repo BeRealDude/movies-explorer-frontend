@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Register() {
+function Register({ onRegister, messageError }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,8 +23,10 @@ function Register() {
   const [passwordError, setPasswordError] = useState('Введите пароль');
 
   const [formValid, setFormValid] = useState(false);
-
-  const navigate = useNavigate();
+  
+  
+  console.log(messageError)
+  
   
   
   useEffect(() => {
@@ -68,7 +70,10 @@ function Register() {
         setPasswordError('Введите пароль')
       }
     } else {
-      setPasswordError('')
+      setPasswordError('');
+    }
+    if(messageError === true) {
+      setPasswordError('Что-то пошло не так...');
     }
   }
    
@@ -90,7 +95,11 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/signin", { replace: true })
+    onRegister({
+      name: name,
+      email: email,
+      password: password,
+    })
   }
   
   return (

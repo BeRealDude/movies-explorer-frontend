@@ -2,10 +2,11 @@ import "./Profile.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-function Profile({ isLoggedIn }) {
+function Profile({ onEditInfoUser, infoUser, onLoginOut }) {
+console.log(infoUser)
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
+  const [name, setName] = useState(infoUser.name);
+  const [email, setEmail] = useState(infoUser.email);
   
   const [touchedName, setTouchedName] = useState(false);
   const [touchedEmail, setTouchedEmail] = useState(false);
@@ -65,18 +66,22 @@ function Profile({ isLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    onEditInfoUser({
+      name: name,
+      email: email,
+    })
   }
 
   const handInOut = (e) => {
     e.preventDefault();
-    isLoggedIn();
+    onLoginOut();
     navigate("/", { replace: true })
   }
   
   return (
     <section className='profile'>
       <div className="profile__container">
-        <h2 className="profile__heading">Привет, Виталий!</h2>
+        <h2 className="profile__heading">{`Привет, ${infoUser.name}`}</h2>
         <form
           className="form-profile"
           name='profile'
@@ -86,7 +91,7 @@ function Profile({ isLoggedIn }) {
         >
           <h3 className="form-profile__heading">Имя</h3>
       <input
-        value={name || ""}
+        value={name || ''}
         onChange={handleChangeName}
         onBlur={blurHandler}
         autoComplete="on"
@@ -99,9 +104,10 @@ function Profile({ isLoggedIn }) {
         id="form-name"
       />
       {(touchedName && nameError) && <span className="form-profile__error form-profile__error_name" id="form-name-error">{nameError}</span>}
+      <div className="border-line"></div>
       <h3 className="form-profile__heading">E-mail</h3>
       <input
-        value={email || ""}
+        value={email || ''}
         onChange={handleChangeEmail}
         onBlur={blurHandler}
         autoComplete="on"
@@ -122,6 +128,7 @@ function Profile({ isLoggedIn }) {
               !formValid && "form-profile__submit-btn_disabled"
             }`}
             disabled={!formValid}
+            onClick={handleSubmit}
           >
             Редактировать
           </button>

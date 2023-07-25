@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Login({ isLoggedIn }) {
+function Login({ onLogin }) {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,8 +21,7 @@ function Login({ isLoggedIn }) {
   const [passwordError, setPasswordError] = useState('Введите пароль');
 
   const [formValid, setFormValid] = useState(false);
-
-  const navigate = useNavigate();
+  
   
   
   useEffect(() => {
@@ -74,8 +73,10 @@ function Login({ isLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    isLoggedIn();
-    navigate("/movies", { replace: true })
+    onLogin({
+      email: email,
+      password: password,
+    });
   }
   
   return (
