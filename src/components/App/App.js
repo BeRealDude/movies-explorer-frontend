@@ -17,6 +17,7 @@ import * as auth from '../../utils/auth';
 import { api } from '../../utils/MainApi'
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import Preloader from '../Preloader/Preloader';
 
 function App() {
   const navigate = useNavigate();
@@ -39,17 +40,22 @@ function App() {
 
   const [messageError, setMessageError] = useState(false);
 
+  const [loading, setLoading] = useState(true);
+ 
+
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false)
+    }, 1000);
+    
+  }, [])
+
   const tokenCheck = useCallback(() => {
     const jwt = localStorage.getItem("jwt");
     if (jwt) {
         auth
         .getContent(jwt)
         .then((info) => {
-          // const { _id, email } = res
-          // infoUser({
-          //   _id,
-          //   email
-          // });
           setLoggedIn(true);
           setCurrentUser(info);
           setInfoUser(info);
@@ -144,6 +150,7 @@ function App() {
   
 
   function handleLoginOut() {
+    localStorage.clear();
     setLoggedIn(false);
     localStorage.removeItem("jwt");
   }
@@ -151,9 +158,9 @@ function App() {
 
   return (
     <>
-    <CurrentUserContext.Provider value={currentUser}>
+    {loading ? <Preloader /> : <CurrentUserContext.Provider value={currentUser}>
       {location.pathname === "/" || location.pathname === "/movies" || location.pathname === "/saved-movies" || location.pathname === "/profile" ? (
-        <Header loggedIn={loggedIn} onBurgerMenu={handleBurgerMenuClick}/>
+        <Header loggedIn={loggedIn} onBurgerMenu={handleBurgerMenuClick} />
       ) : (
         ''
       )}
@@ -178,7 +185,7 @@ function App() {
       isOpen={isBurgerMenuOpen}
       onClose={closeBurgerMenu}
       />
-      </CurrentUserContext.Provider>
+      </CurrentUserContext.Provider>}
     </>
   );
   }

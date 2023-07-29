@@ -2,17 +2,26 @@ import './Movies.css'
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { moviesApi } from '../../utils/MoviesApi';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import Preloader from '../Preloader/Preloader';
 
 
 function Movies() {
 
   const [movies, setMovies] = useState([]);
   const [isResMovies, setResMovies] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [messageError, setMessageError] = useState('');
+  const [onMessage, setMessage] = useState(false);
 
 
 
-
+function showMessageResFind(nameRU) {
+  if(nameRU.length === 0 || isResMovies.length === 0) {
+    setMessage(true)
+    setMessageError('Ничего не найдено')
+  } 
+}
   
   const sortMovies = (movies, valueInput) => {
     const findMoviesUser = movies.filter((movie) => {
@@ -25,39 +34,43 @@ function Movies() {
    }
 
    function findMovies(nameRU) {
+    setLoading(true);
+    localStorage.getItem('movies')
     const resultFind = sortMovies(movies, nameRU)
-    
-    console.log(localStorage)
+    localStorage.setItem('resMovies', JSON.stringify(resultFind));
+    resMovies();
+    showMessageResFind(nameRU)
+  }
+ 
+  useEffect(() => {
     moviesApi.getMovies()
     .then((movie) => {
-      localStorage.setItem('movies', JSON.stringify(resultFind));
       setMovies(movie);
-      resMovies()
+      localStorage.setItem('movies', JSON.stringify(movie));
     })
-    console.log(isResMovies)
-  }
+    .catch((err) => {
+      console.log("Ошибка", err);
+    });
+  }, [])
 
   function resMovies() {
+    setLoading(false);
+    setMessage(false);
     if (localStorage.getItem('movies')) {
-      const reqMovies = JSON.parse(localStorage.getItem('movies'));
+      const reqMovies = JSON.parse(localStorage.getItem('resMovies'));
       setResMovies(reqMovies);
     }
-
+    
   }
 
-  // function formMovie(nameRU) {
-  //   findMovies(nameRU)
-  //   return isResMovies
-
-  // }
-  
-  
+  console.log(movies, 'получение фильмов с апи')
+  console.log(isResMovies, 'полученные фильмы по запросу в поиске')
   
     return (
       <main>
       <div className="movies">
       <SearchForm onFindMovies={findMovies} movies={movies} />
-      <MoviesCardList movies={isResMovies} findMovies={findMovies}/>
+      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} /> : <span className='errorMessage'>{messageError}</span>}
       </div>
       </main>
     );
