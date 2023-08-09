@@ -24,8 +24,8 @@ class MainApi {
     });
   }
 
-  getCards() {
-    return this._request(`${this._baseUrl}/cards`, {
+  getMovies() {
+    return this._request(`${this._baseUrl}/movies`, {
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-type': 'application/json',
@@ -34,7 +34,6 @@ class MainApi {
   }
 
   editInfo(info) {
-    //console.log('api', info)
     return this._request(`${this._baseUrl}/users/me`, {
       method: "PATCH",
       headers: {
@@ -48,22 +47,32 @@ class MainApi {
     });
   }
 
-  addNewCard(data) {
-    return this._request(`${this._baseUrl}/cards`, {
+  saveMovie(movie) {
+    return this._request(`${this._baseUrl}/movies`, {
       method: "POST",
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,
         'Content-type': 'application/json'
     },
       body: JSON.stringify({
-        name: data.name,
-        link: data.link,
+        country: movie.country,
+        director: movie.director,
+        duration: movie.duration,
+        year: movie.year,
+        description: movie.description,
+        image: `https://api.nomoreparties.co${movie.image.url}`,
+        trailerLink: movie.trailerLink,
+        thumbnail: `https://api.nomoreparties.co${movie.image.formats.thumbnail.url}`,
+        movieId: movie.id,
+        nameRU: movie.nameRU,
+        nameEN: movie.nameEN,
       }),
     });
   }
 
-  dltCard(id) {
-    return this._request(`${this._baseUrl}/cards/${id}`, {
+  dltMovie(movie) {
+    console.log(movie)
+    return this._request(`${this._baseUrl}/movies/${movie._id}`, {
       method: "DELETE",
       headers: {
         'Authorization': `Bearer ${localStorage.getItem('jwt')}`,

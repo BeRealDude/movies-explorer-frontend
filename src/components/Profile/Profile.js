@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function Profile({ onEditInfoUser, infoUser, onLoginOut }) {
-console.log(infoUser)
 
   const [name, setName] = useState(infoUser.name);
   const [email, setEmail] = useState(infoUser.email);

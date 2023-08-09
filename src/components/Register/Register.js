@@ -24,8 +24,7 @@ function Register({ onRegister, messageError }) {
 
   const [formValid, setFormValid] = useState(false);
   
-  
-  console.log(messageError)
+
   
   
   

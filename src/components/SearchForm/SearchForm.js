@@ -34,9 +34,7 @@ function SearchForm({ onFindMovies, movies}) {
     
     function handleSubmitFindMovies(e) {
         e.preventDefault();
-        // const res = localStorage.getItem('movies');
         onFindMovies(nameRU)
-        // console.log(onFindMovies(nameRU), 'результат')
 
         if (nameRU === '') {
             setfilmNameError('Введите название Фильма')

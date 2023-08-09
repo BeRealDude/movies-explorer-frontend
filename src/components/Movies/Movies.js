@@ -6,17 +6,16 @@ import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 
 
-function Movies() {
+function Movies({ savedMovies, saveMovie, onLike, deleteMovie }) {
 
   const [movies, setMovies] = useState([]);
   const [isResMovies, setResMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [messageError, setMessageError] = useState('');
   const [onMessage, setMessage] = useState(false);
+  
 
-
-
-function showMessageResFind(nameRU) {
+function showMessageResFind(nameRU, isResMovies) {
   if(nameRU.length === 0 || isResMovies.length === 0) {
     setMessage(true)
     setMessageError('Ничего не найдено')
@@ -39,7 +38,7 @@ function showMessageResFind(nameRU) {
     const resultFind = sortMovies(movies, nameRU)
     localStorage.setItem('resMovies', JSON.stringify(resultFind));
     resMovies();
-    showMessageResFind(nameRU)
+    showMessageResFind(nameRU, resultFind)
   }
  
   useEffect(() => {
@@ -62,15 +61,15 @@ function showMessageResFind(nameRU) {
     }
     
   }
-
-  console.log(movies, 'получение фильмов с апи')
-  console.log(isResMovies, 'полученные фильмы по запросу в поиске')
+ 
   
+  
+
     return (
       <main>
       <div className="movies">
       <SearchForm onFindMovies={findMovies} movies={movies} />
-      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} /> : <span className='errorMessage'>{messageError}</span>}
+      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} saveMovie={saveMovie} savedMovies={savedMovies} onLike={onLike} deleteMovie={deleteMovie} /> : <span className='errorMessage'>{messageError}</span>}
       </div>
       </main>
     );

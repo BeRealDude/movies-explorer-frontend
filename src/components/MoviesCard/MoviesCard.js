@@ -1,32 +1,36 @@
 import { useLocation } from 'react-router-dom';
 import './MoviesCard.css'
 
-function MoviesCard({ movie }) {
-// console.log(movie, 'карточка');
+function MoviesCard({ movie, saveMovie, onLike, deleteMovie, savedMovies }) {
     const location = useLocation();
 
-    // function handleSave(e) {
-    //     e.preventDefault();
-    //     onSaveMovie({
-    //         cover: movie.cover,
-    //         name: movie.name,
-    //         duration: movie.duration,
-    //         id: movie.length
-    //     },);
-    //   }
+    function handleSave(e) {
+        e.preventDefault();
+        saveMovie(movie)
+      }
+     
 
+      function deleteSaveMovie(e) {
+        e.preventDefault();
+        deleteMovie(movie)
+        
+      }
+
+      const isLiked = savedMovies.some(m => m.movieId === movie._id)
+      console.log(savedMovies)
+      console.log(isLiked)
 
     return (
-        <li className="movies-list__card" key={movie.id}>
-            <a href={movie.trailerLink}
+        <li className="movies-list__card" key={location.pathname === '/movies' ? movie.id : movie.movieId}>
+            <a className='href-container' href={movie.trailerLink}
             target="_blank"
             rel="noreferrer"
             >
-            <img className='movies-list__cover' src={`https://api.nomoreparties.co/${movie.image.url}`} alt={movie.nameRU} />
+            <img className='movies-list__cover' src={location.pathname === '/movies' ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image} alt={movie.nameRU} />
             </a>
             <h2 className='movies-list__name'>{movie.nameRU}</h2>
             <span className='movies-list__duration'>{movie.duration}</span>
-            {location.pathname === '/movies' ? <button  type='submit' className='movies-list__btn'></button> : <button className='movies-list__btn-delete'></button>}
+            {location.pathname === '/movies' ? <button  type='submit' className={!isLiked ? 'movies-list__btn' : 'movies-list__btn-active'} onClick={handleSave}></button> : <button className='movies-list__btn-delete' onClick={deleteSaveMovie}></button>}
         </li>
     );
   }

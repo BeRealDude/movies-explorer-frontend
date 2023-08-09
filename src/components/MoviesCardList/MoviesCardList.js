@@ -1,23 +1,46 @@
 import './MoviesCardList.css'
 import MoviesCard from '../MoviesCard/MoviesCard';
 import { useLocation } from 'react-router-dom';
+// import { useEffect, useState } from 'react';
 
-function MoviesCardList({ movies }) {
+function MoviesCardList({ movies, saveMovie, savedMovies, onLike, deleteMovie }) {
   const location = useLocation();
- 
+  // const [resSavedMovies, setSavedMovies] = useState([])
+
+  // useEffect(() => {
+  //   setSavedMovies(savedMovies)
+  // }, [savedMovies])
+  
+  console.log(savedMovies)
 
     return (
-      <div className="moviesCardList">
+     <>
+     {location.pathname === '/movies' ? <div className="moviesCardList">
       <ul className='movies-list'>
       {movies.map((movie) => 
             <MoviesCard
               key={movie.id}
               movie={movie}
+              saveMovie={saveMovie}
+              onLike={onLike}
+              savedMovies={savedMovies}
             />
             )}
       </ul>
       {location.pathname === '/movies' ? <button className='moviesCardList__btn'>Ещё</button> : ''}
-      </div>
+      </div> : <div className="moviesCardList">
+      <ul className='movies-list'>
+      {savedMovies.map((movie) => 
+            <MoviesCard
+              key={movie.movieId}
+              movie={movie}
+              deleteMovie={deleteMovie}
+              savedMovies={savedMovies}
+            />
+            )}
+      </ul>
+      </div>}
+      </>
     );
   }
   

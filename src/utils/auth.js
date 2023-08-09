@@ -23,7 +23,6 @@ export function register(info) {
 }
 
 export function authorize(email, password) {
-  console.log(email, password)
   return fetch(`${BASE_URL}/signin`, {
     method: "POST",
     headers: {
@@ -39,14 +38,12 @@ export function authorize(email, password) {
       if (info.token) {
         const { token } = info;
         localStorage.setItem("jwt", token);
-        console.log('token: ', token)
         return token;
       }
     });
 }
 
 export function getContent(token) {
-  console.log(token)
   return fetch(`${BASE_URL}/users/me`, {
     headers: {
       "Content-Type": "application/json",

@@ -43,6 +43,11 @@ function App() {
   const [loading, setLoading] = useState(true);
  
 
+  const [savedMovies, setSavedMovies] = useState([]);
+  console.log(savedMovies)
+
+  // const [isLike, setLike] = useState(false);
+
   useEffect(() => {
     setTimeout(() => {
       setLoading(false)
@@ -89,7 +94,6 @@ function App() {
   }
 
   function handleLogin(info) {
-    console.log('handleLogin1')
     const { email, password } = info;
     auth
     .authorize(email, password)
@@ -126,10 +130,10 @@ function App() {
 
   useEffect(() => {
     if(loggedIn)
-    Promise.all([api.getInfo()])
-        .then(([info]) => {
-          // setMovies(movies);
+    Promise.all([api.getInfo(), api.getMovies()])
+        .then(([info, data]) => {
           setCurrentUser(info);
+          setSavedMovies(data)
           console.log(info, 'current user')
        })
        .catch((err) => {
@@ -156,6 +160,41 @@ function App() {
   }
 
 
+  // function addLike(movie) {
+    
+  //   if(isLike) {
+  //   // .then(() => {})
+  //   setSavedMovies((state) => state.filter((m) => m.movieId === movie._id ? movie : m)) 
+    
+  //     setLike(true);
+  //   }
+  //   console.log(movie)
+  // }
+
+  function saveMovie(movie) {
+  //  const theLike = (savedMovies((state) => state.filter((m) => m.movieId === movie._id ? movie : m)))
+    api
+    .saveMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies(movie => [newMovie, ...movie]);
+      // setLike(true)
+      
+    })
+  }
+
+  function deleteMovie(movie) {
+    console.log(movie.movieId)
+    api
+        .dltMovie(movie)
+        .then(() => {
+          setSavedMovies((state) => state.filter((m) => m.movieId !== movie._id));
+        })
+        .catch((err) => {
+          console.log(err, 'Ошибка в удалении')
+        })
+  }
+ 
+
   return (
     <>
     {loading ? <Preloader /> : <CurrentUserContext.Provider value={currentUser}>
@@ -167,9 +206,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn}/>} />
-        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn}/>} />
-        <Route path="/profile" element={<ProtectedRoute component={Profile} onLoginOut={handleLoginOut} loggedIn={loggedIn} infoUser={infoUser} onEditInfoUser={editInfoUser}/>} />
+        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn} saveMovie={saveMovie} deleteMovie={deleteMovie} />} />
+        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn} savedMovies={savedMovies} deleteMovie={deleteMovie}/>} />
+        <Route path="/profile" element={<ProtectedRoute component={Profile} onLoginOut={handleLoginOut} loggedIn={loggedIn} infoUser={infoUser} onEditInfoUser={editInfoUser} />} />
         <Route path="/signup" element={<Register onRegister={handleRegister} messageError={messageError}/>} />
         <Route path="/signin" element={<Login isLoggedIn={handleLogin} onLogin={handleLogin}/>} />
         <Route path="*" element={<PageNotFound />} />
