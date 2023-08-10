@@ -175,7 +175,7 @@ function App() {
     api
         .dltMovie(movie)
         .then(() => {
-          setSavedMovies((state) => state.filter((m) => m.movieId !== movie._id));
+          setSavedMovies((state) => state.filter((m) => m._id !== movie._id));
         })
         .catch((err) => {
           console.log(err, 'Ошибка в удалении')
@@ -184,12 +184,9 @@ function App() {
  
 
   function saveMovie(movie) {
-    // const isLiked = savedMovies.some(m => m.movieId === movie.id || m.movieId === movie.movieId)
-    if(savedMovies.some(m => m.movieId === movie.id || m.movieId === movie.movieId)) {
-      console.log(movie)
-      deleteMovie(movie)
-      console.log(deleteMovie(movie))
-     
+    const isLiked = savedMovies.find(m => m.movieId === movie.id || m.movieId === movie.movieId)
+    if(isLiked) {
+      deleteMovie(isLiked)
     } else {
     api
     .saveMovie(movie)
