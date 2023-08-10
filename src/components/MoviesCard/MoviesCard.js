@@ -3,22 +3,39 @@ import './MoviesCard.css'
 
 function MoviesCard({ movie, saveMovie, onLike, deleteMovie, savedMovies }) {
     const location = useLocation();
+    const isLiked = savedMovies.some(m => m.movieId === movie.id || movie.movieId)
 
-    function handleSave(e) {
-        e.preventDefault();
-        saveMovie(movie)
-      }
+    // function handleChangeSaveDelete(e) {
+    //   e.preventDefault();
+    //   if (!isLiked) {
+    //     saveMovie(movie);
+    //   } else {
+    //     deleteMovie(movie);
+    //   }
+    // }
+
+    function handleChangeSaveDelete(e) {
+      e.preventDefault();
+     
+        saveMovie(movie);
+   
+    }
+
+    // function handleSave(e) {
+    //     e.preventDefault();
+    //     saveMovie(movie)
+    //   }
      
 
-      function deleteSaveMovie(e) {
-        e.preventDefault();
-        deleteMovie(movie)
+    //   function deleteSaveMovie(e) {
+    //     e.preventDefault();
+    //     deleteMovie(movie)
         
-      }
+    //   }
+      
 
-      const isLiked = savedMovies.some(m => m.movieId === movie._id)
-      console.log(savedMovies)
-      console.log(isLiked)
+      
+      
 
     return (
         <li className="movies-list__card" key={location.pathname === '/movies' ? movie.id : movie.movieId}>
@@ -30,7 +47,7 @@ function MoviesCard({ movie, saveMovie, onLike, deleteMovie, savedMovies }) {
             </a>
             <h2 className='movies-list__name'>{movie.nameRU}</h2>
             <span className='movies-list__duration'>{movie.duration}</span>
-            {location.pathname === '/movies' ? <button  type='submit' className={!isLiked ? 'movies-list__btn' : 'movies-list__btn-active'} onClick={handleSave}></button> : <button className='movies-list__btn-delete' onClick={deleteSaveMovie}></button>}
+            {location.pathname === '/movies' ? <button  type='submit' className={!isLiked ? 'movies-list__btn' : 'movies-list__btn-active'} onClick={handleChangeSaveDelete}></button> : <button className='movies-list__btn-delete' onClick={handleChangeSaveDelete}></button>}
         </li>
     );
   }

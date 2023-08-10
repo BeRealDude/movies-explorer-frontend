@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
 
 
-function Movies({ savedMovies, saveMovie, onLike, deleteMovie }) {
+function Movies({ savedMovies, saveMovie, onLike, deleteMovie, loggedIn }) {
 
   const [movies, setMovies] = useState([]);
   const [isResMovies, setResMovies] = useState([]);
@@ -61,8 +61,13 @@ function showMessageResFind(nameRU, isResMovies) {
     }
     
   }
- 
   
+  useEffect(() => { 
+    if (localStorage.getItem('movies')) {
+      const reqMovies = JSON.parse(localStorage.getItem('resMovies'));
+      setResMovies(reqMovies);
+    }
+  }, [])
   
 
     return (

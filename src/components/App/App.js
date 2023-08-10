@@ -44,7 +44,6 @@ function App() {
  
 
   const [savedMovies, setSavedMovies] = useState([]);
-  console.log(savedMovies)
 
   // const [isLike, setLike] = useState(false);
 
@@ -171,19 +170,8 @@ function App() {
   //   console.log(movie)
   // }
 
-  function saveMovie(movie) {
-  //  const theLike = (savedMovies((state) => state.filter((m) => m.movieId === movie._id ? movie : m)))
-    api
-    .saveMovie(movie)
-    .then((newMovie) => {
-      setSavedMovies(movie => [newMovie, ...movie]);
-      // setLike(true)
-      
-    })
-  }
 
   function deleteMovie(movie) {
-    console.log(movie.movieId)
     api
         .dltMovie(movie)
         .then(() => {
@@ -194,6 +182,24 @@ function App() {
         })
   }
  
+
+  function saveMovie(movie) {
+    // const isLiked = savedMovies.some(m => m.movieId === movie.id || m.movieId === movie.movieId)
+    if(savedMovies.some(m => m.movieId === movie.id || m.movieId === movie.movieId)) {
+      console.log(movie)
+      deleteMovie(movie)
+      console.log(deleteMovie(movie))
+     
+    } else {
+    api
+    .saveMovie(movie)
+    .then((newMovie) => {
+      setSavedMovies(movie => [newMovie, ...movie]);
+    })
+  }
+  }
+
+  
 
   return (
     <>
@@ -206,8 +212,8 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn} saveMovie={saveMovie} deleteMovie={deleteMovie} />} />
-        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn} savedMovies={savedMovies} deleteMovie={deleteMovie}/>} />
+        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn} saveMovie={saveMovie} savedMovies={savedMovies} deleteMovie={deleteMovie} />} />
+        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn} savedMovies={savedMovies} saveMovie={saveMovie} deleteMovie={deleteMovie}/>} />
         <Route path="/profile" element={<ProtectedRoute component={Profile} onLoginOut={handleLoginOut} loggedIn={loggedIn} infoUser={infoUser} onEditInfoUser={editInfoUser} />} />
         <Route path="/signup" element={<Register onRegister={handleRegister} messageError={messageError}/>} />
         <Route path="/signin" element={<Login isLoggedIn={handleLogin} onLogin={handleLogin}/>} />

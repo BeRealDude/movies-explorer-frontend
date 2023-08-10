@@ -11,7 +11,7 @@ function MoviesCardList({ movies, saveMovie, savedMovies, onLike, deleteMovie })
   //   setSavedMovies(savedMovies)
   // }, [savedMovies])
   
-  console.log(savedMovies)
+  
 
     return (
      <>
@@ -19,11 +19,12 @@ function MoviesCardList({ movies, saveMovie, savedMovies, onLike, deleteMovie })
       <ul className='movies-list'>
       {movies.map((movie) => 
             <MoviesCard
-              key={movie.id}
+              key={movie.movieId || movie.id}
               movie={movie}
               saveMovie={saveMovie}
               onLike={onLike}
               savedMovies={savedMovies}
+              deleteMovie={deleteMovie}
             />
             )}
       </ul>
@@ -32,10 +33,11 @@ function MoviesCardList({ movies, saveMovie, savedMovies, onLike, deleteMovie })
       <ul className='movies-list'>
       {savedMovies.map((movie) => 
             <MoviesCard
-              key={movie.movieId}
+              key={movie.movieId || movie.id}
               movie={movie}
               deleteMovie={deleteMovie}
               savedMovies={savedMovies}
+              saveMovie={saveMovie}
             />
             )}
       </ul>
