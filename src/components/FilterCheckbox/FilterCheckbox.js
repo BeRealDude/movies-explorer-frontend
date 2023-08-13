@@ -1,14 +1,28 @@
-import './FilterCheckbox.css'
 
-function FilterCheckbox() {
-    return (
-      <div className="checkbox-container">
-      <label className='checkbox'>
-        <input className='checkbox__input' type='checkbox' />
-        <span className='checkbox__round'>Короткометражки</span>
-      </label>
-      </div>
-    );
+import "./FilterCheckbox.css";
+
+function FilterCheckbox({ btnShortFilms, setBtnShortFilms }) {
+
+  function switchBtnShortFilms(e) {
+    console.log(btnShortFilms);
+    setBtnShortFilms(e.target.checked);
   }
-  
-  export default FilterCheckbox;
+
+  return (
+    <div className="checkbox-container">
+      <label className="checkbox">
+        <input
+          className="checkbox__input"
+          form="form"
+          type="checkbox"
+          id="checkbox"
+          checked={btnShortFilms}
+          onChange={switchBtnShortFilms}
+        />
+        <span className="checkbox__round">Короткометражки</span>
+      </label>
+    </div>
+  );
+}
+
+export default FilterCheckbox;

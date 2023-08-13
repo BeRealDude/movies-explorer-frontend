@@ -33,7 +33,12 @@ function MoviesCard({ movie, saveMovie, onLike, deleteMovie, savedMovies }) {
         
     //   }
       
-
+    function roundingDown(movie) {
+      const hours = Math.floor(movie.duration / 60);
+      const minutes = movie.duration % 60;
+      
+      return `${hours}ч ${minutes}м`;
+    }
       
       
 
@@ -46,7 +51,7 @@ function MoviesCard({ movie, saveMovie, onLike, deleteMovie, savedMovies }) {
             <img className='movies-list__cover' src={location.pathname === '/movies' ? `https://api.nomoreparties.co/${movie.image.url}` : movie.image} alt={movie.nameRU} />
             </a>
             <h2 className='movies-list__name'>{movie.nameRU}</h2>
-            <span className='movies-list__duration'>{movie.duration}</span>
+            <span className='movies-list__duration'>{roundingDown(movie)}</span>
             {location.pathname === '/movies' ? <button  type='submit' className={!isLiked ? 'movies-list__btn' : 'movies-list__btn-active'} onClick={handleChangeSaveDelete}></button> : <button className='movies-list__btn-delete' onClick={handleChangeSaveDelete}></button>}
         </li>
     );

@@ -4,7 +4,7 @@ import icon from '../../images/icon_find.svg';
 import { useState } from 'react';
 
 
-function SearchForm({ onFindMovies, movies}) {
+function SearchForm({ onFindMovies, btnShortFilms, setBtnShortFilms }) {
     const [nameRU, setnameRU] = useState('');
     const [filmNameTouched, setFilmNameTouched] = useState(false);
     // const [formValid, setFormValid] = useState(false);
@@ -52,7 +52,7 @@ function SearchForm({ onFindMovies, movies}) {
       <button className='form__btn' type="submit"></button>
       </div>
       </form>
-      <FilterCheckbox />
+      <FilterCheckbox btnShortFilms={btnShortFilms} setBtnShortFilms={setBtnShortFilms} />
       </section>
     );
   }
