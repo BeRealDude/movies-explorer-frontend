@@ -25,8 +25,6 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, loggedIn }) {
   
   function handleShortFilms(isResMovies) {
      const filterShortFilms = isResMovies.filter((movie) => movie.duration <= 40);
-    //  setShortFilms(filterShortFilms)
-    //  localStorage.setItem('shortMovies', JSON.stringify(filterShortFilms));
     return filterShortFilms
   }
 
@@ -56,6 +54,7 @@ function showMessageResFind(nameRU, isResMovies) {
    function findMovies(nameRU) {
     setLoading(true);
     localStorage.getItem('movies')
+    localStorage.getItem('btnShortFilms')
     const resultFind = sortMovies(movies, nameRU, btnShortFilms)
     if(btnShortFilms){
     localStorage.setItem('resMovies', JSON.stringify(resultFind));
@@ -80,30 +79,49 @@ function showMessageResFind(nameRU, isResMovies) {
   function resMovies() {
     setLoading(false);
     setMessage(false);
+    // const btnShortFilmsShortMovies = JSON.parse(localStorage.getItem('btnShortFilms'));
     if (localStorage.getItem('movies') && btnShortFilms) {
+      localStorage.getItem('btnShortFilms')
       const reqMovies = JSON.parse(localStorage.getItem('resMovies'));
       setResMovies(reqMovies);
       console.log(reqMovies);
+      // setBtnShortFilms(true)
+      // localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
+      // console.log(btnShortFilms, 'состояние кнопки')
     } else {
-      localStorage.getItem('movies')
+      if (localStorage.getItem('movies') && !btnShortFilms) {
+        localStorage.getItem('btnShortFilms')
       const reqShortMovies = JSON.parse(localStorage.getItem('resShortMovies'));
+      // setBtnShortFilms(false)
+      // localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
+      // console.log(btnShortFilms, 'состояние кнопки')
       setResMovies(reqShortMovies);
       console.log(reqShortMovies);
+      }
   }
     
   }
   
+
   useEffect(() => { 
-    if(isResMovies.length !== 0 && btnShortFilms === false){
+    
+    if (localStorage.getItem('movies') && btnShortFilms) {
+     
       const reqMovies = JSON.parse(localStorage.getItem('resMovies'));
       setResMovies(reqMovies);
     } else {
+      
+      if(localStorage.getItem('movies') && !btnShortFilms) {
       const reqShortMovies = JSON.parse(localStorage.getItem('resShortMovies'));
       setResMovies(reqShortMovies);
+      }
     }
-    
-  }, [])
+    localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
   
+  }, [btnShortFilms]);
+
+
+
 
     return (
       <main>

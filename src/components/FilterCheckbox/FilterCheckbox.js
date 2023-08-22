@@ -6,6 +6,8 @@ function FilterCheckbox({ btnShortFilms, setBtnShortFilms }) {
   function switchBtnShortFilms(e) {
     console.log(btnShortFilms);
     setBtnShortFilms(e.target.checked);
+    // localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
+    //   console.log(btnShortFilms, 'состояние кнопки')
   }
 
   return (
