@@ -4,7 +4,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import { moviesApi } from '../../utils/MoviesApi';
 import { useEffect, useState } from 'react';
 import Preloader from '../Preloader/Preloader';
-
+import { useScreenResolution } from '../../hooks/useScreenResolution'
 
 function Movies({ savedMovies, saveMovie, onLike, deleteMovie, loggedIn }) {
   
@@ -20,8 +20,47 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, loggedIn }) {
 
   const [btnShortFilms, setBtnShortFilms] = useState(false);
 
+  const QTY_CARDS_LARGE_SCREEN = 12;
+  const QTY_CARDS_MIDDLE_SCREEN = 8;
+  const QTY_CARDS_SMALL_SCREEN = 5;
   
+  const LOADS_ADD_CARDS_LG_MID = 3;
+  const LOADS_ADD_CARDS_SMALL = 2;
+
+
+  
+  const desktop = useScreenResolution("(min-width: 1280px)");
+  const tablet = useScreenResolution("(min-width: 768px)");
+  const telephone = useScreenResolution("(min-width: 480px)");
+
+  const initialCards = desktop
+  ? QTY_CARDS_LARGE_SCREEN
+  : tablet
+  ? QTY_CARDS_MIDDLE_SCREEN
+  : telephone
+  && QTY_CARDS_SMALL_SCREEN
+  
+
+  const [cardsDisplay, setCardsDisplay] = useState(initialCards)
  
+
+  const loadsCards = () => {
+    loadsCardsVis();
+  };
+
+
+  const loadsCardsVis = () => {
+    if (desktop) {
+      return setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_LG_MID);
+    }
+
+    if (tablet) {
+      return setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_LG_MID);
+    }
+
+    setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_SMALL);
+  };
+
   
   function handleShortFilms(isResMovies) {
      const filterShortFilms = isResMovies.filter((movie) => movie.duration <= 40);
@@ -79,29 +118,26 @@ function showMessageResFind(nameRU, isResMovies) {
   function resMovies() {
     setLoading(false);
     setMessage(false);
-    // const btnShortFilmsShortMovies = JSON.parse(localStorage.getItem('btnShortFilms'));
     if (localStorage.getItem('movies') && btnShortFilms) {
-      localStorage.getItem('btnShortFilms')
       const reqMovies = JSON.parse(localStorage.getItem('resMovies'));
       setResMovies(reqMovies);
-      console.log(reqMovies);
-      // setBtnShortFilms(true)
-      // localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
-      // console.log(btnShortFilms, 'состояние кнопки')
     } else {
       if (localStorage.getItem('movies') && !btnShortFilms) {
-        localStorage.getItem('btnShortFilms')
       const reqShortMovies = JSON.parse(localStorage.getItem('resShortMovies'));
-      // setBtnShortFilms(false)
-      // localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
-      // console.log(btnShortFilms, 'состояние кнопки')
       setResMovies(reqShortMovies);
-      console.log(reqShortMovies);
       }
   }
     
   }
   
+  useEffect(()=> {
+    const stateBtnShort = JSON.parse(localStorage.getItem('btnShortFilms'))
+    
+    if(stateBtnShort !== null && stateBtnShort === !btnShortFilms) {
+      console.log(stateBtnShort)
+      setBtnShortFilms(stateBtnShort)
+    }
+  }, [])
 
   useEffect(() => { 
     
@@ -116,18 +152,17 @@ function showMessageResFind(nameRU, isResMovies) {
       setResMovies(reqShortMovies);
       }
     }
-    localStorage.setItem('btnShortFilms', JSON.stringify(btnShortFilms));
+   
   
   }, [btnShortFilms]);
-
-
-
+  
+  // console.log(localStorage.getItem('btnShortFilms'))
 
     return (
       <main>
       <div className="movies">
       <SearchForm onFindMovies={findMovies} movies={movies} btnShortFilms={btnShortFilms} setBtnShortFilms={setBtnShortFilms} />
-      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} saveMovie={saveMovie} savedMovies={savedMovies} onLike={onLike} deleteMovie={deleteMovie} /> : <span className='errorMessage'>{messageError}</span>}
+      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} saveMovie={saveMovie} savedMovies={savedMovies} onLike={onLike} deleteMovie={deleteMovie} cardsDisplay={cardsDisplay} loadsCards={loadsCards} /> : <span className='errorMessage'>{messageError}</span>}
       </div>
       </main>
     );
