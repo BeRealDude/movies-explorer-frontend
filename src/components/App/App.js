@@ -10,7 +10,6 @@ import Login from '../Login/Login';
 import { useCallback, useEffect, useState } from 'react';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Footer from '../Footer/Footer';
-import moviesData from '../../utils/moviesData';
 import BurgerMenu from '../BurgerMenu/BurgerMenu';
 import { moviesApi } from '../../utils/MoviesApi';
 import * as auth from '../../utils/auth';
@@ -158,17 +157,7 @@ function App() {
     localStorage.removeItem("jwt");
   }
 
-
-  // function addLike(movie) {
-    
-  //   if(isLike) {
-  //   // .then(() => {})
-  //   setSavedMovies((state) => state.filter((m) => m.movieId === movie._id ? movie : m)) 
-    
-  //     setLike(true);
-  //   }
-  //   console.log(movie)
-  // }
+  
 
 
   function deleteMovie(movie) {

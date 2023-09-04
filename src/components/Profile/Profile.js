@@ -14,8 +14,10 @@ function Profile({ onEditInfoUser, infoUser, onLoginOut }) {
   const [emailError, setEmailError] = useState('Введите почту');
 
   const [formValid, setFormValid] = useState(false);
+  
 
   const navigate = useNavigate();
+  
   
   
   useEffect(() => {

@@ -37,7 +37,7 @@ function SearchForm({ onFindMovies, btnShortFilms, setBtnShortFilms }) {
         onFindMovies(nameRU)
 
         if (nameRU === '') {
-            setfilmNameError('Введите название Фильма')
+            setfilmNameError('Нужно ввести ключевое слово')
         }
     }
     

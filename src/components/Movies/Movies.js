@@ -15,8 +15,7 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, loggedIn }) {
   const [messageError, setMessageError] = useState('');
   const [onMessage, setMessage] = useState(false);
 
-  
-  // const [shortFilms, setShortFilms] = useState([]);
+ 
 
   const [btnShortFilms, setBtnShortFilms] = useState(false);
 
@@ -162,7 +161,8 @@ function showMessageResFind(nameRU, isResMovies) {
       <main>
       <div className="movies">
       <SearchForm onFindMovies={findMovies} movies={movies} btnShortFilms={btnShortFilms} setBtnShortFilms={setBtnShortFilms} />
-      {!onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} saveMovie={saveMovie} savedMovies={savedMovies} onLike={onLike} deleteMovie={deleteMovie} cardsDisplay={cardsDisplay} loadsCards={loadsCards} /> : <span className='errorMessage'>{messageError}</span>}
+      {loading && <Preloader />}
+      {!loading && !onMessage ? <MoviesCardList movies={isResMovies} findMovies={findMovies} loading={loading} saveMovie={saveMovie} savedMovies={savedMovies} onLike={onLike} deleteMovie={deleteMovie} cardsDisplay={cardsDisplay} loadsCards={loadsCards} /> : <span className='errorMessage'>{messageError}</span>}
       </div>
       </main>
     );

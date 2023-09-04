@@ -8,14 +8,14 @@ function MoviesCardList({ movies, saveMovie, savedMovies, onLike, deleteMovie, c
  
   
   
-  const displayForBtnMore = movies ? movies.length : 0;
+  const displayForBtnMore = movies ? movies.length : null;
   const showMoreButton = movies && movies.length > cardsDisplay;
 
     return (
      <>
      {location.pathname === '/movies' ? <div className="moviesCardList">
       <ul className='movies-list'>
-      {movies !== null && movies.slice(0, cardsDisplay).map((movie) => 
+      {movies !== null && movies.slice(null, cardsDisplay).map((movie) => 
             <MoviesCard
               key={movie.movieId || movie.id}
               movie={movie}
