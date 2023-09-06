@@ -44,7 +44,13 @@ function App() {
 
   const [savedMovies, setSavedMovies] = useState([]);
 
-  // const [isLike, setLike] = useState(false);
+ const [noticeUpdate, setNoticeUpdate] = useState('');
+ const [noticeSignIn, setNoticeSignIn] = useState('');
+ const [noticeSignUp, setNoticeSignUp] = useState('');
+ const [noticeDelete, setNoticeDelete] = useState('');
+ const [noticeSave, setNoticeSave] = useState('');
+
+
 
   useEffect(() => {
     setTimeout(() => {
@@ -52,6 +58,17 @@ function App() {
     }, 1000);
     
   }, [])
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNoticeUpdate('')
+      setNoticeSignIn('')
+      setNoticeSignUp('')
+      setNoticeDelete('')
+      setNoticeSave('')
+    }, 3000);
+    
+  }, [noticeUpdate, noticeSignIn, noticeSignUp, noticeDelete, noticeSave])
 
   const tokenCheck = useCallback(() => {
     const jwt = localStorage.getItem("jwt");
@@ -80,7 +97,8 @@ function App() {
       .register(info)
       .then(() => {
         setRegistration(true);
-        navigate("/signin");
+        handleLogin(info);
+        navigate("/movies");
         console.log('Успешно')
         // setMessageError("Что-то пошло не так...");
       })
@@ -88,6 +106,7 @@ function App() {
         setRegistration(false);
         setMessageError(true);
         console.log("ошибка");
+        setNoticeSignUp('Что-то пошло не так...')
       });
   }
 
@@ -108,7 +127,7 @@ function App() {
       })
       .catch(() => {
         // setMessage("Что-то пошло не так...");
-        setRegistration(false);
+        setNoticeSignIn('Что-то пошло не так...')
         console.log("ошибка");
       });
   }
@@ -118,9 +137,11 @@ function App() {
     api.editInfo(info)
     .then(() => {
       setCurrentUser(info)
+      setNoticeUpdate('Профиль успешно отредактирован')
     })
     .catch((err) => {
       console.log(err.name, 'Ошибка при обновлении профиля')
+      setNoticeUpdate('Что-то пошло не так...')
     })
   }
 
@@ -168,6 +189,7 @@ function App() {
         })
         .catch((err) => {
           console.log(err, 'Ошибка в удалении')
+          setNoticeDelete('Что-то пошло не так...')
         })
   }
  
@@ -181,6 +203,9 @@ function App() {
     .saveMovie(movie)
     .then((newMovie) => {
       setSavedMovies(movie => [newMovie, ...movie]);
+    })
+    .catch(() => {
+      setNoticeSave('Что-то пошло не так...')
     })
   }
   }
@@ -198,11 +223,11 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main loggedIn={loggedIn} />} />
-        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn} saveMovie={saveMovie} savedMovies={savedMovies} deleteMovie={deleteMovie} />} />
-        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn} savedMovies={savedMovies} saveMovie={saveMovie} deleteMovie={deleteMovie}/>} />
-        <Route path="/profile" element={<ProtectedRoute component={Profile} onLoginOut={handleLoginOut} loggedIn={loggedIn} infoUser={infoUser} onEditInfoUser={editInfoUser} />} />
-        <Route path="/signup" element={<Register onRegister={handleRegister} messageError={messageError}/>} />
-        <Route path="/signin" element={<Login isLoggedIn={handleLogin} onLogin={handleLogin}/>} />
+        <Route path="/movies" element={<ProtectedRoute component={Movies} movies={movies} loggedIn={loggedIn} saveMovie={saveMovie} savedMovies={savedMovies} deleteMovie={deleteMovie} noticeSave={noticeSave} />} />
+        <Route path="/saved-movies" element={<ProtectedRoute component={SavedMovies} movies={movies} loggedIn={loggedIn} savedMovies={savedMovies} saveMovie={saveMovie} deleteMovie={deleteMovie} noticeDelete={noticeDelete}/>} />
+        <Route path="/profile" element={<ProtectedRoute component={Profile} onLoginOut={handleLoginOut} loggedIn={loggedIn} infoUser={infoUser} onEditInfoUser={editInfoUser} noticeUpdate={noticeUpdate} />} />
+        <Route path="/signup" element={<Register onRegister={handleRegister} messageError={messageError} noticeSignUp={noticeSignUp} />} />
+        <Route path="/signin" element={<Login isLoggedIn={handleLogin} onLogin={handleLogin} noticeSignIn={noticeSignIn} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 

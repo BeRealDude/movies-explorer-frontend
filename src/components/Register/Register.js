@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Register({ onRegister, messageError }) {
+function Register({ onRegister, messageError, noticeSignUp }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -157,6 +157,7 @@ function Register({ onRegister, messageError }) {
         id="form-password"
       />
       {(touchedPassword && passwordError) && <span className="form-page__error form-page__error_password" id="form-password-error">{passwordError}</span>}
+      <span className="form-page__error form-page__error_password">{noticeSignUp}</span>
       <div className="form-page__link-wrapp">
           <p className="form-page__text">Уже зарегистрированы?</p>
           <Link to="/signin" className="form-page__link">

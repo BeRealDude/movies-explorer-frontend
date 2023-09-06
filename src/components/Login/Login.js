@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Login({ onLogin }) {
+function Login({ onLogin, noticeSignIn }) {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -120,6 +120,7 @@ function Login({ onLogin }) {
         id="form-password"
       />
       {(touchedPassword && passwordError) && <span className="form-page__error form-page__error_password-login" id="form-password-error">{passwordError}</span>}
+      <span className="form-page__error form-page__error_password-login">{noticeSignIn}</span>
       <div className="form-page__link-wrapp">
           <p className="form-page__text">Ещё не зарегистрированы?</p>
           <Link to="/signup" className="form-page__link">

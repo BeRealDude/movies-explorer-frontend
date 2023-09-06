@@ -147,3 +147,9 @@
         line-height: normal;
     }
 }
+
+@media (max-width: 745px) {
+    .movies-list__btn-delete {
+        opacity: 1;
+    }
+}
