@@ -13,7 +13,7 @@ function SearchForm({
   setBtnShortFilmsSaved,
   noticeFind,
   noticeDelete,
-  noticeSave
+  noticeSave,
 }) {
   const location = useLocation();
 
@@ -61,23 +61,25 @@ function SearchForm({
 
   function handleSubmitFindMovies(e) {
     e.preventDefault();
-    if (nameRU.length > 0) {
+    if (nameRU !== null && nameRU !== "") {
       onFindMovies(nameRU);
+      localStorage.setItem("wordFind", JSON.stringify(nameRU));
     } else {
       setfilmNameError("Нужно ввести ключевое слово");
+      localStorage.removeItem("wordFind");
     }
-    localStorage.setItem("wordFind", JSON.stringify(nameRU));
   }
 
   function handleSubmitFindMoviesSaved(e) {
     console.log("Поиск по сохранённым");
     e.preventDefault();
-    if (nameRUSaved.length > 0) {
+    if (nameRUSaved !== null && nameRUSaved !== "") {
       findMoviesSaved(nameRUSaved);
+      localStorage.setItem("wordFindSaved", JSON.stringify(nameRUSaved));
     } else {
       setfilmNameErrorSaved("Нужно ввести ключевое слово");
+      localStorage.removeItem("wordFindSaved");
     }
-    localStorage.setItem("wordFindSaved", JSON.stringify(nameRUSaved));
   }
 
   useEffect(() => {
@@ -89,7 +91,8 @@ function SearchForm({
     const wordFindSaved = JSON.parse(localStorage.getItem("wordFindSaved"));
     setnameRUSaved(wordFindSaved);
   }, []);
-
+  
+ 
   return (
     <>
       {location.pathname === "/movies" ? (

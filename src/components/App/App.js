@@ -182,15 +182,18 @@ function App() {
 
 
   function deleteMovie(movie) {
+    const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
     api
         .dltMovie(movie)
         .then(() => {
-          setSavedMovies((state) => state.filter((m) => m._id !== movie._id));
+         setSavedMovies((state) => state.filter((m) => m._id !== movie._id));
         })
         .catch((err) => {
           console.log(err, 'Ошибка в удалении')
           setNoticeDelete('Что-то пошло не так...')
         })
+
+        return reqMovies;
   }
  
 

@@ -10,7 +10,7 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
   const [btnShortFilmsSaved, setBtnShortFilmsSaved] = useState(false);
   const [onMessage, setMessage] = useState(false);
   const [messageError, setMessageError] = useState("");
-  const [isResMoviesSaved, setResMoviesSaved] = useState(savedMovies);
+  const [isResMoviesSaved, setResMoviesSaved] = useState([]);
 
   const location = useLocation();
 
@@ -47,7 +47,7 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
     // localStorage.getItem("movies");
     // localStorage.getItem("btnShortFilmsSaved");
     const resultFind = sortMovies(savedMovies, nameRU, btnShortFilmsSaved);
-    if (btnShortFilmsSaved) {
+    if (btnShortFilmsSaved === false) {
       localStorage.setItem("resMoviesSaved", JSON.stringify(resultFind));
     } else {
       localStorage.setItem("resShortMoviesSaved", JSON.stringify(resultFind));
@@ -59,11 +59,11 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
   function resMovies() {
     setLoading(false);
     setMessage(false);
-    if (savedMovies && btnShortFilmsSaved) {
+    if (savedMovies && btnShortFilmsSaved === false) {
       const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
       setResMoviesSaved(reqMovies);
     } else {
-      if (savedMovies && !btnShortFilmsSaved) {
+      if (savedMovies && btnShortFilmsSaved === true) {
         const reqShortMovies = JSON.parse(
           localStorage.getItem("resShortMoviesSaved")
         );
@@ -80,38 +80,31 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
       setBtnShortFilmsSaved(stateBtnShortSaved);
     }
   }, []);
+  
 
-  // useEffect(() => {
-  //   if (savedMovies !== null && btnShortFilmsSaved) {
-  //     const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
-  //     setResMoviesSaved(reqMovies);
-      
-  //   } else {
-  //     if (savedMovies !== null && !btnShortFilmsSaved) {
-  //       const reqShortMovies = JSON.parse(
-  //         localStorage.getItem("resShortMoviesSaved")
-  //       );
-  //       setResMoviesSaved(reqShortMovies);
-  //     }
-  //   }
-  //   // setResMoviesSaved(savedMovies);
-  //   console.log(savedMovies)
-
-  // }, [btnShortFilmsSaved, savedMovies]);
+  
 
   useEffect(() => {
     const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
-    const resShortSavedMovies = handleShortFilms(savedMovies);
-    if(reqMovies === null && btnShortFilmsSaved) {
-      setResMoviesSaved(savedMovies);
-    } else {
-      if(reqMovies !== null && !btnShortFilmsSaved) {
-      setResMoviesSaved(resShortSavedMovies);
-      }
-    }
-    setResMoviesSaved(savedMovies);
-  }, [savedMovies, btnShortFilmsSaved])
 
+      if (btnShortFilmsSaved === true && reqMovies !== null) {
+        const reqShortMovies = reqMovies.filter(movie => movie.duration <= 40);
+        setResMoviesSaved(reqShortMovies);
+        if(reqShortMovies === null && reqShortMovies.length === 0) {
+          setMessageError("Ничего не найдено");
+        }
+      } else {
+        if(reqMovies !== undefined && reqMovies !== null && btnShortFilmsSaved === false) {
+              setResMoviesSaved(reqMovies);
+            }
+        setResMoviesSaved(savedMovies);
+      }
+      
+     
+  }, [btnShortFilmsSaved, savedMovies]);
+
+
+  
   return (
     <main>
       <div className="saved-movies">

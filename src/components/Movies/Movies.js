@@ -7,13 +7,20 @@ import Preloader from "../Preloader/Preloader";
 import { useScreenResolution } from "../../hooks/useScreenResolution";
 import { useLocation } from "react-router-dom";
 
-function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, loggedIn }) {
+function Movies({
+  savedMovies,
+  saveMovie,
+  onLike,
+  deleteMovie,
+  noticeSave,
+  loggedIn,
+}) {
   const [movies, setMovies] = useState([]);
   const [isResMovies, setResMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [messageError, setMessageError] = useState("");
   const [onMessage, setMessage] = useState(false);
-  const [noticeFind, setNoticeFind] = useState('');
+  const [noticeFind, setNoticeFind] = useState("");
 
   const [btnShortFilms, setBtnShortFilms] = useState(false);
 
@@ -21,9 +28,9 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
 
   useEffect(() => {
     setTimeout(() => {
-      setNoticeFind('')
-    }, 3000)
-  }, [noticeFind])
+      setNoticeFind("");
+    }, 3000);
+  }, [noticeFind]);
 
   const QTY_CARDS_LARGE_SCREEN = 12;
   const QTY_CARDS_MIDDLE_SCREEN = 8;
@@ -40,7 +47,9 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
     ? QTY_CARDS_LARGE_SCREEN
     : tablet
     ? QTY_CARDS_MIDDLE_SCREEN
-    : telephone ? QTY_CARDS_SMALL_SCREEN : QTY_CARDS_SMALL_SCREEN;
+    : telephone
+    ? QTY_CARDS_SMALL_SCREEN
+    : QTY_CARDS_SMALL_SCREEN;
 
   const [cardsDisplay, setCardsDisplay] = useState(initialCards);
 
@@ -55,7 +64,7 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
     if (tablet) {
       return setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_MID_SMALL);
     }
-    if(telephone) {
+    if (telephone) {
       return setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_MID_SMALL);
     }
     return setCardsDisplay(cardsDisplay + LOADS_ADD_CARDS_MID_SMALL);
@@ -75,8 +84,6 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
     }
   }
 
-  
-
   const sortMovies = (movies, valueInput, btnShortFilms) => {
     const findMoviesUser = movies.filter((movie) => {
       const nameRU = String(movie.nameRU).toLowerCase().trim();
@@ -91,74 +98,48 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
     }
   };
 
-  //  function findMovies(nameRU) {
-  //   setLoading(true);
-  //   localStorage.getItem('movies')
-  //   localStorage.getItem('btnShortFilms')
-  //   const resultFind = sortMovies(movies, nameRU, btnShortFilms)
-  //   if(btnShortFilms){
-  //   localStorage.setItem('resMovies', JSON.stringify(resultFind));
-  //   } else {
-  //     localStorage.setItem('resShortMovies', JSON.stringify(resultFind));
-  //   }
-  //   resMovies();
-  //   showMessageResFind(nameRU, resultFind)
-  // }
-
-  // useEffect(() => {
-  //   moviesApi.getMovies()
-  //   .then((movie) => {
-  //     setMovies(movie);
-  //     localStorage.setItem('movies', JSON.stringify(movie));
-  //   })
-  //   .catch((err) => {
-  //     console.log("Ошибка", err);
-  //   });
-  // }, [])
-  
-
   function findMovies(nameRU) {
     setLoading(true);
- 
+
     moviesApi
       .getMovies()
       .then((movies) => {
         localStorage.setItem("movies", JSON.stringify(movies));
         localStorage.getItem("btnShortFilms");
         const resultFind = sortMovies(movies, nameRU, btnShortFilms);
-        if (btnShortFilms) {
+        if (btnShortFilms === false) {
           localStorage.setItem("resMovies", JSON.stringify(resultFind));
         } else {
           localStorage.setItem("resShortMovies", JSON.stringify(resultFind));
         }
         resMovies();
         showMessageResFind(nameRU, resultFind);
-        setCardsDisplay(initialCards)
+        setCardsDisplay(initialCards);
       })
       .catch((err) => {
         console.log("Ошибка", err);
-        setNoticeFind('Что-то пошло не так...')
+        setNoticeFind("Что-то пошло не так...");
       });
   }
-
-  // useEffect((nameRU) => {
-  //     findMovies(nameRU);
-  // }, []);
 
   function resMovies() {
     setLoading(false);
     setMessage(false);
-    if (localStorage.getItem("movies") && btnShortFilms) {
+    if (localStorage.getItem("movies") && btnShortFilms === false) {
       const reqMovies = JSON.parse(localStorage.getItem("resMovies"));
       setResMovies(reqMovies);
+      console.log(reqMovies);
+      console.log(isResMovies);
     } else {
-      if (localStorage.getItem("movies") && !btnShortFilms) {
+      if (localStorage.getItem("movies") && btnShortFilms === true) {
         const reqShortMovies = JSON.parse(
           localStorage.getItem("resShortMovies")
         );
         setResMovies(reqShortMovies);
+        console.log(reqShortMovies);
       }
     }
+    console.log(isResMovies);
   }
 
   useEffect(() => {
@@ -169,23 +150,24 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
       setBtnShortFilms(stateBtnShort);
     }
   }, []);
-
+ 
+  
   useEffect(() => {
-    if (localStorage.getItem("movies") && btnShortFilms) {
-      const reqMovies = JSON.parse(localStorage.getItem("resMovies"));
-      setResMovies(reqMovies);
-    } else {
-      if (localStorage.getItem("movies") && !btnShortFilms) {
-        const reqShortMovies = JSON.parse(
-          localStorage.getItem("resShortMovies")
-        );
+    const reqMovies = JSON.parse(localStorage.getItem("resMovies"));
+
+      if (localStorage.getItem("movies") && btnShortFilms === true && reqMovies !== null) {
+        const reqShortMovies = reqMovies.filter(movie => movie.duration <= 40);
         setResMovies(reqShortMovies);
-        console.log(reqShortMovies)
+        if(reqShortMovies === null && reqShortMovies.length === 0) {
+          setMessageError("Ничего не найдено");
+        }
+      } else {
+        setResMovies(reqMovies);
       }
-    }
+     
   }, [btnShortFilms]);
 
-  // console.log(localStorage.getItem('btnShortFilms'))
+  
 
   return (
     <main>
@@ -204,8 +186,8 @@ function Movies({ savedMovies, saveMovie, onLike, deleteMovie, noticeSave, logge
           <span className="errorMessage">{messageError}</span>
         ) : (
           !loading &&
-          !onMessage && (
-            location.pathname === "/movies" &&
+          !onMessage &&
+          location.pathname === "/movies" && (
             <MoviesCardList
               movies={isResMovies}
               findMovies={findMovies}

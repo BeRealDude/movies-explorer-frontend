@@ -13,8 +13,7 @@ function MoviesCardList({
   resMoviesSaved,
 }) {
   const location = useLocation();
-  console.log(resMoviesSaved);
-  console.log(movies);
+  
 
   const showMoreButton = movies && movies.length > cardsDisplay;
 
