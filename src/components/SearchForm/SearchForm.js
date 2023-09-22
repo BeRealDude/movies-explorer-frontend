@@ -14,6 +14,8 @@ function SearchForm({
   noticeFind,
   noticeDelete,
   noticeSave,
+  setResMoviesSaved,
+  savedMovies
 }) {
   const location = useLocation();
 

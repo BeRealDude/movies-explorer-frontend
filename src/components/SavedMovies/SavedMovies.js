@@ -5,7 +5,13 @@ import { useEffect, useState } from "react";
 import Preloader from "../Preloader/Preloader";
 import { useLocation } from "react-router-dom";
 
-function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete }) {
+function SavedMovies({
+  movies,
+  savedMovies,
+  deleteMovie,
+  saveMovie,
+  noticeDelete,
+}) {
   const [loading, setLoading] = useState(false);
   const [btnShortFilmsSaved, setBtnShortFilmsSaved] = useState(false);
   const [onMessage, setMessage] = useState(false);
@@ -35,7 +41,7 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
       const value = valueInput.toLowerCase().trim();
       return nameRU.indexOf(value) !== -1 || nameEn.indexOf(value) !== -1;
     });
-    if (btnShortFilmsSaved) {
+    if (btnShortFilmsSaved === true) {
       return handleShortFilms(findMoviesUser);
     } else {
       return findMoviesUser;
@@ -73,38 +79,55 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
   }
 
   useEffect(() => {
-    const stateBtnShortSaved = JSON.parse(localStorage.getItem("btnShortFilmsSaved"));
+    const stateBtnShortSaved = JSON.parse(
+      localStorage.getItem("btnShortFilmsSaved")
+    );
 
-    if (stateBtnShortSaved !== null && stateBtnShortSaved === !btnShortFilmsSaved) {
+    if (
+      stateBtnShortSaved !== null &&
+      stateBtnShortSaved === !btnShortFilmsSaved
+    ) {
       console.log(stateBtnShortSaved);
       setBtnShortFilmsSaved(stateBtnShortSaved);
     }
   }, []);
-  
-
-  
 
   useEffect(() => {
     const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
-
-      if (btnShortFilmsSaved === true && reqMovies !== null) {
-        const reqShortMovies = reqMovies.filter(movie => movie.duration <= 40);
-        setResMoviesSaved(reqShortMovies);
-        if(reqShortMovies === null && reqShortMovies.length === 0) {
-          setMessageError("Ничего не найдено");
-        }
-      } else {
-        if(reqMovies !== undefined && reqMovies !== null && btnShortFilmsSaved === false) {
-              setResMoviesSaved(reqMovies);
-            }
-        setResMoviesSaved(savedMovies);
-      }
-      
-     
+    if (btnShortFilmsSaved === true && reqMovies === null) {
+      setResMoviesSaved(savedMovies.filter((movie) => movie.duration <= 40));
+    } else {
+      setResMoviesSaved(savedMovies);
+    }
   }, [btnShortFilmsSaved, savedMovies]);
 
+  useEffect(() => {
+    const reqMovies = JSON.parse(localStorage.getItem("resMoviesSaved"));
+    const reqWord = JSON.parse(localStorage.getItem("wordFindSaved"));
 
-  
+    if (btnShortFilmsSaved === true && reqMovies !== null && reqWord !== null) {
+      const resultFind = sortMovies(savedMovies, reqWord, btnShortFilmsSaved);
+      const reqShortMovies = resultFind.filter((movie) => movie.duration <= 40);
+      setResMoviesSaved(reqShortMovies);
+      if (reqShortMovies === null && reqShortMovies.length === 0) {
+        showMessageResFind(reqWord, resultFind);
+      }
+    } else {
+      if (
+        reqMovies !== undefined &&
+        reqMovies !== null &&
+        btnShortFilmsSaved === false &&
+        reqWord !== null
+      ) {
+        const resultFind = sortMovies(savedMovies, reqWord, btnShortFilmsSaved);
+        setResMoviesSaved(resultFind);
+        if (reqMovies === null && reqMovies.length === 0 && reqWord === null) {
+          showMessageResFind(reqWord, resultFind);
+        }
+      }
+    }
+  }, [btnShortFilmsSaved, savedMovies]);
+
   return (
     <main>
       <div className="saved-movies">
@@ -113,18 +136,27 @@ function SavedMovies({ movies, savedMovies, deleteMovie, saveMovie, noticeDelete
           btnShortFilmsSaved={btnShortFilmsSaved}
           setBtnShortFilmsSaved={setBtnShortFilmsSaved}
           noticeDelete={noticeDelete}
-        />
-        {loading ? <Preloader /> : onMessage ? 
-          <span className="errorMessage">{messageError}</span>
-          : !loading && !onMessage && 
-          <MoviesCardList
-          movies={movies}
+          setResMoviesSaved={setResMoviesSaved}
           savedMovies={savedMovies}
-          deleteMovie={deleteMovie}
-          saveMovie={saveMovie}
-          resMoviesSaved={isResMoviesSaved}
-          loading={loading}
-        />}
+          isResMoviesSaved={isResMoviesSaved}
+        />
+        {loading ? (
+          <Preloader />
+        ) : onMessage ? (
+          <span className="errorMessage">{messageError}</span>
+        ) : (
+          !loading &&
+          !onMessage && (
+            <MoviesCardList
+              movies={movies}
+              savedMovies={savedMovies}
+              deleteMovie={deleteMovie}
+              saveMovie={saveMovie}
+              resMoviesSaved={isResMoviesSaved}
+              loading={loading}
+            />
+          )
+        )}
       </div>
     </main>
   );
