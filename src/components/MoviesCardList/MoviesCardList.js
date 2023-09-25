@@ -1,26 +1,67 @@
-import './MoviesCardList.css'
-// import Preloader from '../Preloader/Preloader'
-import MoviesCard from '../MoviesCard/MoviesCard';
-import { useLocation } from 'react-router-dom';
+import "./MoviesCardList.css";
+import MoviesCard from "../MoviesCard/MoviesCard";
+import { useLocation } from "react-router-dom";
 
-function MoviesCardList({ movies, onSaveMovie }) {
+function MoviesCardList({
+  movies,
+  saveMovie,
+  savedMovies,
+  onLike,
+  deleteMovie,
+  cardsDisplay,
+  loadsCards,
+  resMoviesSaved,
+}) {
   const location = useLocation();
-
-    return (
-      <div className="moviesCardList">
-      {/* <Preloader /> */}
-      <ul className='movies-list'>
-      {movies.map((movie, savedMoviesPage) =>
-            <MoviesCard
-              key={movie.id}
-              movie={movie}
-              onSaveMovie={onSaveMovie}
-            />
-            )}
-      </ul>
-      {location.pathname === '/movies' ? <button className='moviesCardList__btn'>Ещё</button> : ''}
-      </div>
-    );
-  }
   
-  export default MoviesCardList;
+
+  const showMoreButton = movies && movies.length > cardsDisplay;
+
+  return (
+    <>
+      {location.pathname === "/movies" ? (
+        <div className="moviesCardList">
+          <ul className="movies-list">
+            {movies !== null &&
+              movies
+                .slice(null, cardsDisplay)
+                .map((movie) => (
+                  <MoviesCard
+                    key={movie.movieId || movie.id}
+                    movie={movie}
+                    saveMovie={saveMovie}
+                    onLike={onLike}
+                    savedMovies={savedMovies}
+                    deleteMovie={deleteMovie}
+                  />
+                ))}
+          </ul>
+          {showMoreButton && (
+            <button className="moviesCardList__btn" onClick={loadsCards}>
+              Ещё
+            </button>
+          )}
+        </div>
+      ) : (
+          <div className="moviesCardList">
+            <ul className="movies-list">
+              {resMoviesSaved !== null &&
+                resMoviesSaved.map((movie) => (
+                  <MoviesCard
+                    key={movie.movieId || movie.id}
+                    movie={movie}
+                    deleteMovie={deleteMovie}
+                    savedMovies={savedMovies}
+                    saveMovie={saveMovie}
+                    resMoviesSaved={resMoviesSaved}
+                  />
+                ))}
+            </ul>
+          </div>
+        
+      )}
+    </>
+  );
+}
+
+export default MoviesCardList;

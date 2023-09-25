@@ -1,7 +1,7 @@
 import './Login.css';
 import { useEffect, useState } from "react";
 import Form from "../Form/Form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 
@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Login({ isLoggedIn }) {
+function Login({ onLogin, noticeSignIn }) {
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -21,8 +21,7 @@ function Login({ isLoggedIn }) {
   const [passwordError, setPasswordError] = useState('Введите пароль');
 
   const [formValid, setFormValid] = useState(false);
-
-  const navigate = useNavigate();
+  
   
   
   useEffect(() => {
@@ -74,8 +73,10 @@ function Login({ isLoggedIn }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    isLoggedIn();
-    navigate("/movies", { replace: true })
+    onLogin({
+      email: email,
+      password: password,
+    });
   }
   
   return (
@@ -119,6 +120,7 @@ function Login({ isLoggedIn }) {
         id="form-password"
       />
       {(touchedPassword && passwordError) && <span className="form-page__error form-page__error_password-login" id="form-password-error">{passwordError}</span>}
+      <span className="form-page__error form-page__error_password-login">{noticeSignIn}</span>
       <div className="form-page__link-wrapp">
           <p className="form-page__text">Ещё не зарегистрированы?</p>
           <Link to="/signup" className="form-page__link">

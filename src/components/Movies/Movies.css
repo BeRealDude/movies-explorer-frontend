@@ -2,6 +2,14 @@
     padding: 70px 70px 80px;
 }
 
+.errorMessage {
+    display: flex;
+    justify-content: center;
+    color: #FFF;
+    font-size: 18px;
+    line-height: 22px;
+}
+
 @media (max-width: 1175px) {
     .movies {
         padding: 86px 30px 80px;

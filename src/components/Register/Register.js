@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 
 
-function Register() {
+function Register({ onRegister, messageError, noticeSignUp }) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -23,8 +23,9 @@ function Register() {
   const [passwordError, setPasswordError] = useState('Введите пароль');
 
   const [formValid, setFormValid] = useState(false);
+  
 
-  const navigate = useNavigate();
+  
   
   
   useEffect(() => {
@@ -68,7 +69,10 @@ function Register() {
         setPasswordError('Введите пароль')
       }
     } else {
-      setPasswordError('')
+      setPasswordError('');
+    }
+    if(messageError === true) {
+      setPasswordError('Что-то пошло не так...');
     }
   }
    
@@ -90,7 +94,11 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    navigate("/signin", { replace: true })
+    onRegister({
+      name: name,
+      email: email,
+      password: password,
+    })
   }
   
   return (
@@ -149,6 +157,7 @@ function Register() {
         id="form-password"
       />
       {(touchedPassword && passwordError) && <span className="form-page__error form-page__error_password" id="form-password-error">{passwordError}</span>}
+      <span className="form-page__error form-page__error_password">{noticeSignUp}</span>
       <div className="form-page__link-wrapp">
           <p className="form-page__text">Уже зарегистрированы?</p>
           <Link to="/signin" className="form-page__link">
